@@ -1,0 +1,61 @@
+{%  extends "Home_Business/base.html"  %}
+{% load static %}
+{%  block content   %} 
+{% if user.is_authenticated  %}
+<meta http-equiv = "refresh" content = "0; url ={% url 'LikHanap-Business' %}" />      
+{% endif %}
+      
+      
+
+            <div class="left">
+                <img img src="{%static 'Home_Business/Pre Home Page Banner.jpg'%}" alt="Image" height="350" width="1343" style="margin:-20px 0px 0px -117px;" type="image"> </img>
+        
+               <p></p> <span class="text-center d-inline-block">
+          <a class="btn btn-primary btn-lg w-100" href="{% url 'register' %}" role="button">Register now!</a>
+          <small class ="text-white">
+                  If you already have an account <a class = "text-white ml-2" href="{% url 'login' %}">Login now</a>
+              </small>
+        </span>
+            <br><br>
+                <p></p> <img img src="{%static 'Home_Business/How it works Business side.png'%}" style="margin:30px 50px 0px 50px;" type="image"> </img>
+                <br><br>
+                
+                <style>
+                    
+                    h1 {
+                        text-indent: 380px;
+                      text-transform: uppercase;
+                      color: rgb(24, 185, 132);
+                    }
+                    h2 {
+                        text-indent: 370px;
+                      text-transform: uppercase;
+                      color: rgb(126, 24, 185);
+                    }
+                    p {
+                    margin:0px -250px 0px 100px;
+                      text-align: justify;
+                      letter-spacing: 1px;
+                    }
+                </style>
+                    <br><br>
+                    <h2><strong>Sole Proprietors</strong></h2><br>
+                    <p>Laying foundations in brand development needs experts to get it done. May it be logos, advertisements, layout commissions or web projects; Likhanap will help Small Business Owners to have a place where it’s easier to find Freelance Artists providing these Sole Proprietors with more options and freedom in choosing the right freelancers to cater their needs. </p>
+                <br><br><br>
+                <p></p> <img img src="{%static 'Home_Business/How it works Freelancer side.png'%}" style="margin:15px 50px 0px 50px;" type="image"> </img>
+                <br><br><br><br>
+                <h1><strong>Local Artists</strong></h1><br>
+                    <p>
+                      Local artists are facing a big challenge in terms of prime or financial stability. A useful way of producing a stable level of income is by commissioning art works. Here at Likhanap, we are constantly aiming to expose our artists to the high demands of art project commissions, be it in a form of; Digital Arts, Multimedia or even Freehand, we will do our best to make them accessible to those who need their help.</p><br><br><br>
+                        
+                <p></p> <img img src="{%static 'Home_Business/Services offered.png'%}" type="image"> </img>
+        
+            <style></style>
+          </div>
+        </br>
+      </br>
+    </br>
+  </br>
+{%  endblock content   %} 
+   
+  

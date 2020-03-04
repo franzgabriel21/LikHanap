@@ -1,0 +1,100 @@
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+{%   load static   %}
+{% if user.is_authenticated and user.usertype == 'business' %}
+<div class="container">
+      <h3><b>LikHanap Terms and Conditions</b></h3>
+      </br>
+        <p>Last updated: 2-23-20</p>
+        <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the www.LikHanap.com.ph website operated by “LikHanap” ("us", "we", or "our").</p>
+        <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+        <b>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</b> 
+      </br>
+      </br>
+      </br>
+        <b>Content</b>
+      </br>
+      </br>    
+        <p>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material ("Content"). You are responsible for the …</p>
+      </br>
+      </br>
+      </br>    
+      <b>Links To Other Web Sites</b>
+      </br>
+      </br>   
+      <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by LikHanapPH</p>
+      <p>LikHanapPH has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that LikHanapPH shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content or services available on or through any such web sites or services.</p>
+      </br>
+      </br> 
+      </br>
+      <b>Changes</b>
+      </br>
+      </br> 
+      <p>
+        We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+        </p>
+      </br>
+      </br> 
+      </br>
+      <b>Contact Us</b>
+      </br>
+      </br> 
+      <p>
+        If you have any questions about these Terms, please contact us.
+        </p>
+        <a class="btn btn-outline-danger" href="{% url 'LikHanap-Apply' %}">DECLINE</a>
+        <a class= "btn btn-primary btn-sm w-5 lead" href="{% url 'Employ-Create' %}" role="button">ACCEPT THE TERMS</a>
+      </div>
+
+      {% endif %}
+
+ {% if user.is_authenticated and user.usertype == 'freelance' %}
+ <div class="container">
+  <h3><b>LikHanap Terms and Conditions</b></h3>
+  </br>
+    <p>Last updated: 2-23-20</p>
+    <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the www.LikHanap.com.ph website operated by “LikHanap” ("us", "we", or "our").</p>
+    <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+    <b>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</b> 
+  </br>
+  </br>
+  </br>
+    <b>Content</b>
+  </br>
+  </br>    
+    <p>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material ("Content"). You are responsible for the …</p>
+  </br>
+  </br>
+  </br>    
+  <b>Links To Other Web Sites</b>
+  </br>
+  </br>   
+  <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by LikHanapPH</p>
+  <p>LikHanapPH has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that LikHanapPH shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content or services available on or through any such web sites or services.</p>
+  </br>
+  </br> 
+  </br>
+  <b>Changes</b>
+  </br>
+  </br> 
+  <p>
+    We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+    </p>
+  </br>
+  </br> 
+  </br>
+  <b>Contact Us</b>
+  </br>
+  </br> 
+  <p>
+    If you have any questions about these Terms, please contact us.
+    </p>
+    <a class="btn btn-outline-danger" href="{% url 'LikHanap-Bids' %}">DECLINE</a>
+    <a class= "btn btn-primary btn-sm w-5 lead" href="{% url 'Accept-Create' %}" role="button">ACCEPT THE TERMS</a>
+  </div>
+
+  {% endif %}
+
+{%  endblock content   %} 
+   
+  
