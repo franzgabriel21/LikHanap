@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
+from captcha.fields import CaptchaField
 
 User = get_user_model()
 USER_TYPE= [
@@ -26,7 +27,7 @@ class UserRegisterForm(UserCreationForm):
      street= forms.CharField(label='Residential street', widget=forms.Select(choices=STREET))     
      name = forms.CharField(label='Full Name/Name of Business', max_length=30, required = False)
      image = forms.ImageField(label='Profile Picture', required = False)
-    
+     captcha = CaptchaField()
      class Meta:
         model = User
         fields = ['username', 'email', 'name', 'usertype', 'city','street', 'password1', 'password2']
