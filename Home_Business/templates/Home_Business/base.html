@@ -48,17 +48,19 @@
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Proposals</a>
                                 <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
-                                <form >
-                                    <div class="searchBox">
-                                        <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
-                                        <button class="searchButton" type="submit">
-                                            <i class="material-icons">
-                                                search
-                                            </i>
-                                        </button>
-                                    </div>
-                                  </form>
-                                    </div>
+                                  
+                                  <form >
+                                      <div class="searchBox">
+                                          <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
+                                          <button class="searchButton" type="submit">
+                                              <i class="material-icons">
+                                                  search
+                                              </i>
+                                          </button>
+                                      </div>
+                                    </form>
+                                      </div>
+                                  
                                 {% elif user.is_authenticated and user.usertype == 'business'  %}
                                 <!--<a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>-->
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
@@ -68,16 +70,18 @@
                                 <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
 
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
-                                <form >
-                                  <div class="searchBox">
-                                    <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
-                                    <button class="searchButton" type="submit">
-                                        <i class="material-icons">
-                                            search
-                                        </i>
-                                    </button>
-                                </div>
-                                  </form>
+                                       
+                                  <form >
+                                    <div class="searchBox">
+                                      <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
+                                      <button class="searchButton" type="submit">
+                                          <i class="material-icons">
+                                              search
+                                          </i>
+                                      </button>
+                                  </div>
+                                    </form>
+                                   
                                     </div>
                                 {% else %}
                                 {% endif %}

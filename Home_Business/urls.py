@@ -23,7 +23,6 @@ ApplyCreateView, ApplyListView, ApplyDetailView, ApplyUpdateView, ApplyDeleteVie
 AcceptDetailView, AcceptListView, AcceptCreateView, AcceptUpdateView, AcceptDeleteView,
 EmployListView, EmployDetailView, EmployCreateView, EmployUpdateView, EmployDeleteView)
  
-
 from . import views
 
 
@@ -55,7 +54,7 @@ urlpatterns = [
     path('portfolios/', PortfolioListView.as_view(), name = 'LikHanap-Freelance'),
         
     path('user/<str:username>', UserPostListView.as_view(), name = 'user-posts'),
-
+    
     path('post/<int:pk>/', PostDetailView.as_view(), name = 'Post-Detail'),
     
     #

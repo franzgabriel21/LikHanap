@@ -10,6 +10,7 @@ from .models import Accept
 from .models import Employ
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -37,15 +38,21 @@ class PostListView(ListView):
     def get_queryset(self):
         
         request = self.request
-        query = request.GET.get('q', None)
-        if query is not None:
-            posts_results= Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
-             Q(author__username__icontains=query) | Q(location__icontains=query))
-            
-            
-            return posts_results
+        query = request.GET.get('q', ' ')
+        posts_results= Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
+            Q(author__username__icontains=query) | Q(location__icontains=query) | Q(category__icontains=query))
+        posts_count=Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
+            Q(author__username__icontains=query) | Q(location__icontains=query)| Q(category__icontains=query)).count()  
+        try:
+            if posts_count < 1:
+                messages.warning(request, f'We did not found anything, try searching again.')
+                return Post.objects.all()
+        except:
+            messages.warning(request, f'We did not found anything, try searching again.')
+             
         else:
-            return Post.objects.all()
+            return posts_results
+        
 
     
 
@@ -59,15 +66,21 @@ class ProjectListView(ListView):
     def get_queryset(self):
         
         request = self.request
-        query = request.GET.get('q', None)
-        if query is not None:
-            posts_results= Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
-             Q(author__username__icontains=query) | Q(location__icontains=query))
-            
-            
-            return posts_results
+        query = request.GET.get('q', ' ')
+        posts_results= Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
+            Q(author__username__icontains=query) | Q(location__icontains=query) | Q(category__icontains=query))
+        posts_count=Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
+            Q(author__username__icontains=query) | Q(location__icontains=query)| Q(category__icontains=query)).count()  
+        try:
+            if posts_count < 1:
+                messages.warning(request, f'We did not found anything, try searching again.')
+                return Post.objects.all()
+        except:
+            messages.warning(request, f'We did not found anything, try searching again.')
+             
         else:
-            return Post.objects.all()
+            return posts_results
+        
     
 
 class LogoArtistListView(ListView):
@@ -200,18 +213,25 @@ class PortfolioListView(ListView):
     ordering = [ '-dateposted']
     paginate_by = 5
 
+    
     def get_queryset(self):
         
         request = self.request
-        query = request.GET.get('q', None)
-        if query is not None:
-            Portfolio_results= Portfolio.objects.filter(Q(Expertise__icontains=query) | Q(Background__icontains=query) |
-             Q(author__username__icontains=query) | Q(location__icontains=query))
-            
-            
-            return Portfolio_results
+        query = request.GET.get('q', ' ')
+        Portfolio_results= Portfolio.objects.filter(Q(Expertise__icontains=query) | Q(Background__icontains=query) |
+             Q(author__username__icontains=query) | Q(location__icontains=query) | Q(category__icontains=query))
+        Portfolio_count=Portfolio.objects.filter(Q(Expertise__icontains=query) | Q(Background__icontains=query) |
+             Q(author__username__icontains=query) | Q(location__icontains=query) | Q(category__icontains=query)).count()  
+        try:
+            if Portfolio_count < 1:
+                messages.warning(request, f'We did not found anything, try searching again.')
+                return Portfolio.objects.all()
+        except:
+            messages.warning(request, f'We did not found anything, try searching again.')
+             
         else:
-            return Portfolio.objects.all()
+            return Portfolio_results
+        
 
 class PortfolioDetailView(DetailView):
     model = Portfolio   
@@ -251,6 +271,8 @@ class BidCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user 
         return super().form_valid(form)
+        
+    
 
 class BidsListView(ListView):
     model = Bid    
@@ -290,6 +312,7 @@ class ApplyCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user 
         return super().form_valid(form)
+        
 
 class ApplyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Apply    
