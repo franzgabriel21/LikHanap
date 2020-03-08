@@ -140,9 +140,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'LikHanap-HomeStatus'
 LOGIN_URL = 'login' 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
-EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_PASSWORD = 'likhanap00'  
-EMAIL_HOST_USER = 'cs.likhanap@gmail.com'  
-EMAIL_PORT = 485  
-EMAIL_USE_TLS = True  
