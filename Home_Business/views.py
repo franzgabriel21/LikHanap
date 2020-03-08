@@ -10,6 +10,7 @@ from .models import Accept
 from .models import Employ
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+
 User = get_user_model()
 
 
@@ -32,6 +33,21 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = [ '-dateposted']
     paginate_by = 5
+    
+    def get_queryset(self):
+        
+        request = self.request
+        query = request.GET.get('q', None)
+        if query is not None:
+            posts_results= Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
+             Q(author__username__icontains=query) | Q(location__icontains=query))
+            
+            
+            return posts_results
+        else:
+            return Post.objects.all()
+
+    
 
 class ProjectListView(ListView):
     model = Post    
@@ -39,6 +55,20 @@ class ProjectListView(ListView):
     context_object_name = 'projects'
     ordering = [ '-dateposted']
     paginate_by = 5
+
+    def get_queryset(self):
+        
+        request = self.request
+        query = request.GET.get('q', None)
+        if query is not None:
+            posts_results= Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) |
+             Q(author__username__icontains=query) | Q(location__icontains=query))
+            
+            
+            return posts_results
+        else:
+            return Post.objects.all()
+    
 
 class LogoArtistListView(ListView):
     model = Portfolio    
@@ -169,6 +199,19 @@ class PortfolioListView(ListView):
     context_object_name = 'portfolios'
     ordering = [ '-dateposted']
     paginate_by = 5
+
+    def get_queryset(self):
+        
+        request = self.request
+        query = request.GET.get('q', None)
+        if query is not None:
+            Portfolio_results= Portfolio.objects.filter(Q(Expertise__icontains=query) | Q(Background__icontains=query) |
+             Q(author__username__icontains=query) | Q(location__icontains=query))
+            
+            
+            return Portfolio_results
+        else:
+            return Portfolio.objects.all()
 
 class PortfolioDetailView(DetailView):
     model = Portfolio   

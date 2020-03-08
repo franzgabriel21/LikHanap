@@ -1,6 +1,5 @@
 body {
-  background: #fafafa;
-  color: #333333;
+  
   margin-top: 5rem;
 }
 
@@ -135,7 +134,7 @@ margin-top:0px;
 
 } 
 .footer {
-  background: #222;
+  
   color: #aaa;
   padding-top: 10px;
   position: absolute;
@@ -143,7 +142,7 @@ margin-top:0px;
   bottom: 0;
   left: 0;
   padding: 1rem;
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(71, 58, 58);
   text-align: center;
 }
 body {
