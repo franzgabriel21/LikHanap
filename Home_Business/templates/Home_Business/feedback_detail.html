@@ -1,0 +1,23 @@
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+            
+<h2>Thank you for your feedback!</h2>
+     <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
+              <div class="media-body">
+                <div class="article-metadata">
+                 <small class="text-muted"><b>{{ object.author }}</b> | {{ object.dateposted }}</small>
+               </div>
+          </br>
+          <p class="article-Comment">{{ object.Comment }}</p>
+
+          <small class="text-muted"> <b>Send feedback to: {{ object.artist_username }}</b></small> 
+     </br>
+</br>
+          <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Freelance' %}" role="button">OK</a> 
+     </br>
+             </div>
+      </article>
+           
+{%  endblock content   %} 
+   

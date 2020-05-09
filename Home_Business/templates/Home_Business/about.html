@@ -1,12 +1,288 @@
 {%  extends "Home_Business/base.html"  %}
 {%  block content   %} 
+{%   load static   %}
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+  <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+  
+ 
+{% if title %}
+<title> LikHanap - {{title}}</title>
+{% else %}
+<title>LikHanap </title>
+{% endif %}
+</head>
+<body>
+<header class="site-header">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      
+    <div class="container">
+        {% if user.is_authenticated  %}
+          <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}"> 
+        {% else %}3
+          <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+        {% endif %} 
+        <span class='span-logo'> 
+          <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+      </span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          
+          {% if user.is_authenticated and user.usertype == 'freelance'  %}
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Business' %}">Projects</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Proposals</a>
+                                <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+                                <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+                                <a class="active" href="{% url 'LikHanap-About' %}">About</a>
+                                  
+                                 
+                                      </div>
+                                
+          {% elif user.is_authenticated and user.usertype == 'business'  %}
+          <!--<a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>-->
+          <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Freelance' %}">Freelancers</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
+          <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+          <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+          <a class="active" href="{% url 'LikHanap-About' %}">About</a>
+         
+              </div>
+          {% else %}
+          {% endif %}
+        <!-- Navbar Right Side -->
+
+        <div class="navbar-nav">
+          {%  if user.is_authenticated  %}
+          <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+          <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+          {%  else  %}
+          <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+          <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+          {%  endif  %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {%  if messages  %}
+              {%  for message in messages  %}
+                  <div class="alert alert-{{ message.tags }}">
+                       {{ message }}
+                      </div>
+              {%  endfor  %}
+          {%  endif  %}
+         
+        </div>
+</main>
+</body>
+</head>
 
         <div class="container">
           <h1 class="display-4"><kbd>About</kbd></h1>
             </br>
+          </br>
           <p class="lead">Likhanap is a platform that will offer an optimal solution to connect both Sole Proprietors and Local Artists nationwide. Our aim is to deliver diverse forms of Digital and Multimedia Arts to consumers as quickly and conveniently as possible.</p>
         </div>
-      
+      </br>
+      <img img src="{%static 'Home_Business/Our_Team.png'%}" alt="Image" height="50" width="150" style="margin:-20px 0px 0px 270px;" type="image"> </img>
+      </br>
+    </br>
+
+      <div class="row" style= "overflow: auto;" >
+     
+        <div class="column" >  
+          <style>
+            a:hover {
+              background-color: rgb(145, 194, 236);
+            }
+            img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            }
+            h3 {text-align:center;}
+            h2 {text-align:left;}
+            h5 {text-align:justify;color:#ffffff;}
+            </style>
+          <a class="navbar-brand mr-4" href="#section1"> 
+          <span class='span-logo'> 
+            <img src="{%static 'Home_Business/Almira.png'%}" height="200" width="170" class="center">
+        </span></a>
+        
+        </div>
+        <div class="column">
+          <style>
+            a:hover {
+              background-color: rgb(195, 214, 236);
+            }
+            img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            }
+            h3 {text-align:center;}
+            h2 {text-align:left;}
+            h5 {text-align:justify;color:#ffffff;}
+            </style>
+          <a class="navbar-brand mr-4" href="#section2"> 
+          <span class='span-logo'> 
+            <img src="{%static 'Home_Business/Ej.png'%}" height="200" width="170" class="center">
+        </span></a>
+        </div>
+        <div class="column">
+          <style>
+            a:hover {
+              background-color:#eed5af;
+            }
+            img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            }
+            h3 {text-align:center;}
+            h2 {text-align:left;}
+            h5 {text-align:justify;color:#ffffff;}
+            </style>
+          <a class="navbar-brand mr-4" href="#section3"> 
+          <span class='span-logo'> 
+            <img src="{%static 'Home_Business/Gabriel.png'%}" height="200" width="170" class="center">
+        </span></a>
+        </div>
+        <div class="column">
+          <style>
+            a:hover {
+              background-color: #d7c1ff;
+            }
+            img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            }
+            h3 {text-align:center;}
+            h2 {text-align:left;}
+            h5 {text-align:justify;color:#ffffff;}
+            </style>
+          <a class="navbar-brand mr-4" href="#section4"> 
+          <span class='span-logo'> 
+            <img src="{%static 'Home_Business/Nica.png'%}" height="200" width="170" class="center">
+        </span></a>
+        </div>
+      </div>
+</br>
+</br>
+</br>
+</br>
+<style>
+body {
+    position: relative; 
+}
+#section1 {padding-top:80px;padding-bottom:200px;color: #fff; background-color: rgb(145, 194, 236);}
+#section2 {padding-top:80px;padding-bottom:200px;color: #fff; background-color: #8be9df;}
+#section3 {padding-top:80px;padding-bottom:200px;color: #fff; background-color: #eed5af;}
+#section4 {padding-top:80px;padding-bottom:200px;color: #fff; background-color: #d7c1ff;}
+
+
+</style>
+
+<div id="section1" class="container-fluid">
+</br>
+<img src="{%static 'Home_Business/Almira.png'%}" height="200" width="170" style="vertical-align:top">
+</br>
+
+<h3><b>Almira Fajardo</b></h3>
+</br>
+<h2><b>Project Manager & Web Developer</b></h2>
+<h5>Responsible for the acquaintance 
+  with the technical specifications  
+  and due dates.</h5>
+  <h5>She monitors the 
+  whole product development 
+  process to ensure each project 
+  plan will be ended on time.
+  </h5>
+</br>
+</div>
+<div id="section2" class="container-fluid">
+</br>
+<img src="{%static 'Home_Business/Ej.png'%}" height="200" width="170" style="vertical-align:top">
+</br>
+
+<h3><b>Elton John Tuazon</b></h3>
+</br>
+<h2><b>Requirement analyst</b></h2>
+
+<h5>Responsible to prepare the ground 
+  for the product development.</h5>
+<h5>He takes
+  vision of the project, analyzes it, and 
+  translate into comprehensive 
+  technical specifications.</h5>
+<h5>In turn, these 
+  specifications will be used by the web 
+  development team to set time frames 
+  and get ready for the project. 
+  </h5>
+</br>
+</div>
+<div id="section3" class="container-fluid">
+</br>
+<img src="{%static 'Home_Business/Gabriel.png'%}" height="200" width="170" style="vertical-align:top">
+</br>
+
+<h3><b>Gabriel Catipon</b></h3>
+</br>
+<h2><b>UI/UX Designer & Web Developer</b></h2>
+<h5>Responsible for the analysis of
+  the project requirements along 
+  with its target audience to see 
+  the complete picture.</h5>
+  <h5>Such 
+    approach lets him identify the 
+    difficulties users are faced with 
+    and effectively solve them 
+    through design. 
+  </h5>
+</br>
+</div>
+
+<div id="section4" class="container-fluid">
+</br>
+<img src="{%static 'Home_Business/Nica.png'%}" height="200" width="170" style="vertical-align:top">
+</br>
+
+<h3><b>Janica Gulinao</b></h3>
+</br>
+<h2><b>Marketing strategist</b></h2>
+<h5>Responsible for creating a working 
+  strategy which helps the platform 
+  to reach its objectives as well as to
+  ensure the realization of this strategy.</h5>
+  <h5>She analyzes the performance of 
+    different marketing channels, and 
+    defines whether the platform 
+    objectives are met. 
+  </h5>
+</br>
+</div>
 {%  endblock content   %} 
    
   

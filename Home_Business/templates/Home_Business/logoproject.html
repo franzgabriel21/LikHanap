@@ -9,7 +9,8 @@
           <h1 class="display-2 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
   <p class="lead">A platform for connecting freelance graphic artists and web designers to sole proprietors and linking local artists to local consumers.</p>
         <span class="text-center d-inline-block">
-          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>        <p class=" lead text-white">Create now!</p>
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>        
+          <p class=" lead text-white">Create now!</p>
         </span>
       </div>
           <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
@@ -37,19 +38,35 @@
 </div>
 {% endif %}
 
-<nav class="navbar navbar-inverse">
-  <div class="navbar navbar-expand-lg text-center navbar-dark black">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'Logo-Project' %}">LOGOS</a>
-      </div>
-    <ul class="nav navbar-nav">
-      <li class="inactive"></li><a href="{% url 'Ad-Project' %}">ADVERTISEMENTS</a></li>
-      <li class="inactive"></li><a href="{% url 'Tarpaulin-Project' %}">TARPAULINS</a></li>
-      <li class="inactive"></li><a href="{% url 'Invi-Project' %}">INVITATIONS</a></li>
-      <li class="inactive"></li><a href="{% url 'Interior-Project' %}">INTERIORS</a></li>
-    </ul>
-  </div>
-</nav>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="{% url 'Logo-Project' %}">Logo</a>
+  <a href="{% url 'Ad-Project' %}">Advertisement</a>
+  <a href="{% url 'Brandtag-Project' %}">Brand Taglines</a>
+  <a href="{% url 'Visual-Project' %}">Visual Arts</a>
+  <a href="{% url 'Interior-Project' %}">Interior Designs</a>
+  <a href="{% url 'LikHanap-Business2' %}">LikHanap Verified</a>
+
+</div>
+
+<div id="main">
+  
+  <p>Check out all the categories to see what you're looking for.</p>
+  <h1 style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Categories</h1>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
 </br>
 
       <h1 class = "mb-3">Logo Layout's Category</h1>
@@ -64,17 +81,25 @@
                   <small class="text-muted">{{ post.dateposted }}</small>
                 </div>
                 {% if user.is_authenticated and user.usertype == 'freelance' %}
-                <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+                {% if post.verified  == 'False' %}
+                    <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+                    {% elif post.verified  == 'True' %}
+                    <h2><a class="article-title" href="{% url 'VerifiedPost-Detail' post.id %}">{{ post.title }}</a></h2>
+                    {% endif %}
                 <p class="article-content">{{ post.content }}</p>
                 <p class="article-category">{{ post.category }}</p>
-                <p class="article-location">{{ post.location }}</p>
+                <p class="article-location">{{ post.city }}, {{ post.street }}</p>
                 <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Apply-Create' %}" role="button">Apply</a>
                 {% endif %}
                 {% if user.is_authenticated and user.usertype == 'business' %}
-                <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+                    {% if object.verified  == 'False' %}
+                    <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+                    {% elif object.verified  == 'True' %}
+                    <h2><a class="article-title" href="{% url 'VerifiedPost-Detail' post.id %}">{{ post.title }}</a></h2>
+                    {% endif %}
                 <p class="article-content">{{ post.content }}</p>
                 <p class="article-category">{{ post.category }}</p>
-                <p class="article-location">{{ post.location }}</p>
+                <p class="article-location">{{ post.city }}, {{ post.street }}</p>
                 {% endif %}
               </div>
               {% endif %}   

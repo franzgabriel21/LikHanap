@@ -1,0 +1,91 @@
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+{%   load static   %}
+<h1 class="display-4"><kbd>Profile Information</kbd></h1>
+            <article class="media content-section">
+              <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                    <div class="media-body">
+                      <div class="article-metadata">
+                        <br>
+                        <br>
+                        <h2>{{ user.name }}</h2>
+                      </div>
+                      <br>
+                        <b>Username: </b>{{ user.username }}
+                        <br>
+                        <br>
+                      <b>Email: </b>{{ user.email }}
+                      <br>
+                      <br>
+                      {% if user.is_authenticated and user.usertype == 'freelance' %}
+                      <b>I am a: </b>Freelancer
+                      <br>
+                      <br>
+                      {% elif user.is_authenticated and user.usertype == 'business' %}
+                      <b>I am a: </b>Business
+                      <br>
+                      <br>
+                      <style>
+                        .collapsible {
+                          background-color: rgb(255, 255, 255);
+                          color: rgb(0, 0, 0);
+                          cursor: pointer;
+                          padding: 18px;
+                          width: 100%;
+                          border: none;
+                          text-align: left;
+                          outline: none;
+                          font-size: 15px;
+                        }
+                        
+                        .active, .collapsible:hover {
+                          background-color: #b49696;
+                        }
+                        
+                        .content {
+                          padding: 0 18px;
+                          display: none;
+                          overflow: hidden;
+                          background-color: #f1f1f1;
+                        }
+                        </style>
+                      <button type="button" class="collapsible"><b>Verified: </b>{{ user.verified }}</button>
+                        
+                        <div class="content">
+                          <p>To verify your account, kindly send your, Name of the business and DTI/Sec number for confirmation at <b>cs.likhanap@gmail.com</b>
+                            .</p>
+                        </div>
+                        <br>
+                      
+                        <script>
+                        var coll = document.getElementsByClassName("collapsible");
+                        var i;
+
+                        for (i = 0; i < coll.length; i++) {
+                          coll[i].addEventListener("click", function() {
+                            this.classList.toggle("active");
+                            var content = this.nextElementSibling;
+                            if (content.style.display === "block") {
+                              content.style.display = "none";
+                            } else {
+                              content.style.display = "block";
+                            }
+                          });
+                        }
+                        </script>
+                        
+                      {% endif %}
+                      <br>
+                      <b>City: </b>{{ user.city }}
+                      <br>
+                      <br>
+                      <b>Street: </b>{{ user.street }}
+                      <br>
+                      <br>
+                      
+                      <a class="btn btn-outline-info" href="{% url 'profile' %}">Edit Profile</a>
+                    </div>
+                  </article>
+            
+{%  endblock content   %} 
+   
