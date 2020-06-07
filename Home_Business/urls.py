@@ -14,20 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import (PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView,
+from .views import (VerifiedUserPostListView, VerifiedPostListView, PostListView, PostDetailView, VerifiedPostDetailView, PostCreateView, VerifiedPostCreateView, PostUpdateView, VerifiedPostUpdateView,  VerifiedPostDeleteView, PostDeleteView, UserPostListView,
 PortfolioDetailView, PortfolioCreateView, PortfolioUpdateView, PortfolioDeleteView, PortfolioListView, 
-ProjectListView, LogoArtistListView, TarpArtistListView, AdArtistListView, InviArtistListView,  InteriorArtistListView,
-LogoProjectListView, TarpProjectListView, AdProjectListView, InviProjectListView,  InteriorProjectListView,
+ProjectListView, LogoArtistListView, BrandtagArtistListView, AdArtistListView, VisualArtistListView,  InteriorArtistListView,
+LogoProjectListView, BrandtagProjectListView, AdProjectListView, VisualProjectListView,  InteriorProjectListView,
 BidCreateView, BidsListView, BidDetailView, BidUpdateView, BidDeleteView,
 ApplyCreateView, ApplyListView, ApplyDetailView, ApplyUpdateView, ApplyDeleteView,
 AcceptDetailView, AcceptListView, AcceptCreateView, AcceptUpdateView, AcceptDeleteView,
-EmployListView, EmployDetailView, EmployCreateView, EmployUpdateView, EmployDeleteView)
+EmployListView, EmployDetailView, EmployCreateView, EmployUpdateView, EmployDeleteView,
+FeedbackCreateView, FeedbackDetailView, FeedbackListView)
  
 from . import views
 
 
 urlpatterns = [
     path('posts/', PostListView.as_view(), name = 'LikHanap-Business'),
+    path('vposts/', VerifiedPostListView.as_view(), name = 'LikHanap-Business2'),
 
     path('projects/', ProjectListView.as_view(), name = 'LikHanap-Projects'),
 
@@ -35,17 +37,17 @@ urlpatterns = [
 
     path('logoproject/', LogoProjectListView.as_view(), name = 'Logo-Project'),
 
-    path('tarpartist/', TarpArtistListView.as_view(), name = 'Tarpaulin-Artist'),
+    path('brandtagartist/', BrandtagArtistListView.as_view(), name = 'Brandtag-Artist'),
 
-    path('tarpproject/', TarpProjectListView.as_view(), name = 'Tarpaulin-Project'),
+    path('brandtagproject/', BrandtagProjectListView.as_view(), name = 'Brandtag-Project'),
 
     path('adartist/', AdArtistListView.as_view(), name = 'Ad-Artist'),
 
     path('adproject/', AdProjectListView.as_view(), name = 'Ad-Project'),
 
-    path('inviartist/', InviArtistListView.as_view(), name = 'Invi-Artist'),
+    path('visualartist/', VisualArtistListView.as_view(), name = 'Visual-Artist'),
 
-    path('inviproject/', InviProjectListView.as_view(), name = 'Invi-Project'),
+    path('visualproject/', VisualProjectListView.as_view(), name = 'Visual-Project'),
 
     path('interiorartist/', InteriorArtistListView.as_view(), name = 'Interior-Artist'),
 
@@ -54,22 +56,26 @@ urlpatterns = [
     path('portfolios/', PortfolioListView.as_view(), name = 'LikHanap-Freelance'),
         
     path('user/<str:username>', UserPostListView.as_view(), name = 'user-posts'),
-    
-    path('post/<int:pk>/', PostDetailView.as_view(), name = 'Post-Detail'),
+   
+    path('vuser/<str:username>', VerifiedUserPostListView.as_view(), name = 'user-verifiedposts'),
+
     
     #
     path('portfolios/<int:pk>/', PortfolioDetailView.as_view(), name = 'Portfolio-Detail'),
     #
     
     path('post/new/', PostCreateView.as_view(), name = 'Post-Create'),
-    
+    path('vpost/new/', VerifiedPostCreateView.as_view(), name = 'VerifiedPost-Create'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name = 'Post-Detail'),
+    path('verified_posts/<int:pk>/', VerifiedPostDetailView.as_view(), name = 'VerifiedPost-Detail'),
     #
     path('portfolios/new/', PortfolioCreateView.as_view(), name = 'Portfolio-Create'),
     #
     
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name = 'Post-Update'),
+    path('post/<int:pk>/update/', VerifiedPostUpdateView.as_view(), name = 'VerifiedPost-Update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name = 'Post-Delete'),
-    
+    path('post/<int:pk>/delete/', VerifiedPostDeleteView.as_view(), name = 'VerifiedPost-Delete'),
     #
     path('portfolios/<int:pk>/update/', PortfolioUpdateView.as_view(), name = 'Portfolio-Update'),
     path('portfolios/<int:pk>/delete/', PortfolioDeleteView.as_view(), name = 'Portfolio-Delete'),
@@ -105,10 +111,15 @@ urlpatterns = [
     path('employs/new/', EmployCreateView.as_view(), name = 'Employ-Create'),
     path('employ/<int:pk>/update/', EmployUpdateView.as_view(), name = 'Employ-Update'),
     path('employ/<int:pk>/delete/', EmployDeleteView.as_view(), name = 'Employ-Delete'),
-
+    #
     
+    path('feedback/new/', FeedbackCreateView.as_view(), name = 'Feedback-Create'),
+    path('feedback/', FeedbackListView.as_view(), name = 'Feedback'),
+    path('feedback/<int:pk>/', FeedbackDetailView.as_view(), name = 'Feedback-Detail'),
 
     path('about/', views.about, name = 'LikHanap-About'),
+    path('help/', views.help, name = 'Help-Center'),
+    path('view', views.view, name = 'Profile-View'),
     path('terms/', views.terms, name = 'LikHanap-Terms'),
     path('homestatus/', views.homestatus, name = 'LikHanap-HomeStatus'),
     path('', views.prehome, name='prehome'),

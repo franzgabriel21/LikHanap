@@ -27,6 +27,7 @@ class MyAccountManager(BaseUserManager):
 		user.is_admin = True
 		user.is_staff = True
 		user.is_superuser = True
+		
 		user.save(using=self._db)
         
 		return user
@@ -38,7 +39,8 @@ class User(AbstractBaseUser):
     name 				    = models.CharField(max_length=30, unique=True)
     usertype 				= models.CharField(max_length=30)
     city 					= models.CharField(max_length=30)
-    street	 				= models.CharField(max_length=30)	
+    street	 				= models.CharField(max_length=30)
+    verified				= models.CharField(max_length=30, default='False')	
     date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin				= models.BooleanField(default=False)
