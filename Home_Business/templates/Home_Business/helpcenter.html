@@ -1,0 +1,257 @@
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+{%   load static   %}
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+  <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+  
+ 
+{% if title %}
+<title> LikHanap - {{title}}</title>
+{% else %}
+<title>LikHanap </title>
+{% endif %}
+</head>
+<body>
+  <h1 class="display-4"><kbd>Help Center</kbd></h1>
+<header class="site-header">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      
+    <div class="container">
+        {% if user.is_authenticated  %}
+          <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}"> 
+        {% else %}3
+          <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+        {% endif %} 
+        <span class='span-logo'> 
+          <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+      </span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          
+          {% if user.is_authenticated and user.usertype == 'freelance'  %}
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Business' %}">Projects</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Proposals</a>
+                                <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+                                <a class="active" href="{% url 'Help-Center' %}">Help Center</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+                                  
+                                 
+                                      </div>
+                                
+          {% elif user.is_authenticated and user.usertype == 'business'  %}
+          <!--<a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>-->
+          <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Freelance' %}">Freelancers</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
+          <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+          <a class="active" href="{% url 'Help-Center' %}">Help Center</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+         
+              </div>
+          {% else %}
+          {% endif %}
+        <!-- Navbar Right Side -->
+
+        <div class="navbar-nav">
+          {%  if user.is_authenticated  %}
+          <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+          <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+          {%  else  %}
+          <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+          <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+          {%  endif  %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {%  if messages  %}
+              {%  for message in messages  %}
+                  <div class="alert alert-{{ message.tags }}">
+                       {{ message }}
+                      </div>
+              {%  endfor  %}
+          {%  endif  %}
+         
+        </div>
+</main>
+</body>
+</head>
+
+</br>
+
+<div class="container">
+  <img img src="{%static 'Home_Business/Help_Center.png'%}" alt="Image" height="340" width="848" style="margin:-20px 0px 0px -117px;" type="image"> </img>
+ </div>
+    </br>
+    {% if user.is_authenticated and user.usertype == 'freelance'  %}
+
+        <h3>Help Articles</h3>
+        <p class='text-muted'>Browse some popular help topics here.
+    <ul class="list-group">
+      <p><a href="#section1">I can't remember my password</a></p>
+      <p><a href="#section2">What happens after I applied for a commission?</a></p>
+      <p><a href="#section3">How can I send a message to my commission partner?</a></p>
+      <p><a href="#section4">How can I check the credibility of my commission partner?</a></p>
+    </ul>
+  </br>
+  </br>
+  </br>
+  </br>
+  <style>
+    body {
+        position: relative; 
+    }
+    #section1 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: rgb(68, 154, 230);}
+    #section2 {padding-top:80px;padding-bottom:300px;color: #fff; background-color: #9165dd;}
+    #section3 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: #ff9800;}
+    #section4 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: #009688;}
+    </style>
+
+<h2><b>FAQ</b></h2>
+
+  <div id="section1" class="container-fluid">
+  </br>
+  </br>
+    <h2>Reset Password</h2>
+  </br>
+    <p>STEP 1: Proceed to Login page then click "Forgot Password".</p>
+    <p>STEP 2: Enter your registered email address.</p>
+    <p>STEP 3: A link would be sent to your email address which will redirect you to our Reset Password page</p>
+    <p>STEP 4: Enter your new desired password.</p> 
+    <p>STEP 5: You can now log in with your new password.</p> 
+  </br>
+  </div>
+    <div id="section2" class="container-fluid">
+  </br>
+  </br>
+      <h2>Post an application accessible to the public</h2>
+  </br>
+      <p>STEP 1: Click the "Post an application" button under the website preview on the Homestatus/Projects Tab.</p>
+      <p>STEP 2: Fill out the required fields on the application form. (Note: You can attach images of your previous commissions inside your application)</p>
+      <p>STEP 3: Click the "Submit" button.</p>
+      <p>STEP 4: After submitting the form, you can now see a preview of your application. You can click the "Update" or "Delete" button to change or dispose your current application, you can also click the "GO BACK TO HOMEPAGE" button to proceed to the homestatus.</p>   
+ </br>
+ </br>
+      <h2>Post an application exclusively to a specific business owner</h2>
+  </br>
+      <p>STEP 1: Go to "Projects" tab.</p>
+      <p>STEP 2: Look from the list of project offers and click the "Apply" button to your chosen commission.</p>
+      <p>STEP 3: Fill out the required fields on the application form. (Note: You can attach images of your previous commissions inside your application)</p>
+      <p>STEP 4: Click the "Submit" button.</p> 
+      <p>STEP 5: After submitting the form, you can now see a preview of your application. You can click the "Update" or "Delete" button to change or dispose your current application, you can also click the "GO BACK TO HOMEPAGE" button to proceed to the homestatus.</p> 
+    
+    </br>
+    </div>
+    <div id="section3" class="container-fluid">
+    </br>
+    </br>
+      <h2>Inbox tab</h2>
+    </br>
+      <p>STEP 1: Go to "Inbox" tab to see your confirmed applications.</p>
+      <p>STEP 2: Here you can look up the contact details shared to you by your commission partner.</p>
+      <p>STEP 3: Click the "Reply" button to give/make a response.</p>
+    </br>
+  </div>
+  <div id="section4" class="container-fluid">
+  </br>
+    </br>
+    <h2>Verified Businesses</h2>
+    <p>STEP 1: Go to "Projects" tab.</p>
+    <p>STEP 2: Choose 'Likhanap Verified' from the categories.</p>
+    <p>STEP 3: Likhanap will help you confirm the credibility of your commission partner and check if the business is really existing and officially registered.</p>
+  </br>
+
+    </div>
+   
+    {% elif user.is_authenticated and user.usertype == 'business'  %}
+
+    <h3>Help Articles</h3>
+        <p class='text-muted'>Browse some popular help topics here.
+    <ul class="list-group">
+      <p><a href="#section1">I can't remember my password</a></p>
+      <p><a href="#section2">Where can I find my posted commissions?</a></p>
+      <p><a href="#section3">How can I send a message to my commission partner?</a></p>
+      <p><a href="#section4">How do I request a verified badge for my commission posts?</a></p>
+    </ul>
+  </br>
+  </br>
+  </br>
+  </br>
+  <style>
+    body {
+        position: relative; 
+    }
+    #section1 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: rgb(68, 154, 230);}
+    #section2 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: #9165dd;}
+    #section3 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: #ff9800;}
+    #section4 {padding-top:80px;padding-bottom:360px;color: #fff; background-color: #009688;}
+    </style>
+
+<h2><b>FAQ</b></h2>
+
+  <div id="section1" class="container-fluid">
+  </br>
+</br>
+  <h2>Reset Password</h2>
+</br>
+  <p>STEP 1: Proceed to Login page then click "Forgot Password".</p>
+  <p>STEP 2: Enter your registered email address.</p>
+  <p>STEP 3: A link would be sent to your email address which will redirect you to our Reset Password page</p>
+  <p>STEP 4: Enter your new desired password.</p> 
+  <p>STEP 5: You can now log in with your new password.</p> 
+</br>
+</div>
+    <div id="section2" class="container-fluid">
+    </br>
+    </br>
+      <h2>Project's Tab</h2>
+    </br>
+    <p>STEP 1: Go to "Projects" tab and look for your recent posted commission.</p>
+    <p>STEP 2: Click on your username to be redirected to a page wherein you can view the total number of your posted commissions.</p>
+    <p>STEP 3: You can also browse through the list of your previous posts and view them individually.</p>  
+  </br>
+    </div>
+    <div id="section3" class="container-fluid">
+    </br>
+  </br>
+    <h2>Inbox tab</h2>
+  </br>
+    <p>STEP 1: Go to "Inbox" tab to see your confirmed applications.</p>
+    <p>STEP 2: Here you can look up the contact details shared to you by your commission partner.</p>
+    <p>STEP 3: Click the "Reply" button to give/make a response.</p>
+  </br>
+  </div>
+    <div id="section4" class="container-fluid">
+    </br>
+  </br>
+      <h2>Business Verification</h2>
+      <p>STEP 1: Send the name of your business and your DTI/Sec number at cs.likhanap@gmail.com.</p>
+      <p>STEP 2: After the verification process is completed, you can check to see if your business has been verified in your profile.</p>
+      <p>STEP 3: Once your business has been verified, freelance artists could now see your credibility as a commission partner.</p>
+    </br>
+    </div>
+    {% else %}
+          {% endif %}
+{%  endblock content   %} 
+   
+  

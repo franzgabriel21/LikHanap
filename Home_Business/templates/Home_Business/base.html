@@ -8,13 +8,14 @@
                         <!-- Required meta tags -->
                         <meta charset="utf-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-                    
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+
                         <!-- Bootstrap CSS -->
                         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
                         <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
                         <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
-                        
+                        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
                        
                 {% if title %}
                 <title> LikHanap - {{title}}</title>
@@ -34,7 +35,7 @@
                                 <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
                               {% endif %} 
                               <span class='span-logo'> 
-                                <img src="/media/LikHanap Logo 4.png" style="widows: 250px;height:74px; "  >
+                                <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
                             </span></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -47,18 +48,10 @@
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-Business' %}">Projects</a>
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Proposals</a>
                                 <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+                                <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
                                   
-                                  <form >
-                                      <div class="searchBox">
-                                          <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
-                                          <button class="searchButton" type="submit">
-                                              <i class="material-icons">
-                                                  search
-                                              </i>
-                                          </button>
-                                      </div>
-                                    </form>
+                                  
                                       </div>
                                   
                                 {% elif user.is_authenticated and user.usertype == 'business'  %}
@@ -68,20 +61,10 @@
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
                                 <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
-
+                                <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
                                 <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
                                        
-                                  <form >
-                                    <div class="searchBox">
-                                      <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
-                                      <button class="searchButton" type="submit">
-                                          <i class="material-icons">
-                                              search
-                                          </i>
-                                      </button>
-                                  </div>
-                                    </form>
-                                   
+                                  
                                     </div>
                                 {% else %}
                                 {% endif %}
@@ -89,7 +72,7 @@
 
                               <div class="navbar-nav">
                                 {%  if user.is_authenticated  %}
-                                <a class="nav-item nav-link " href="{% url 'profile' %}">Welcome! {{ user.name }}</a>
+                                <a class="nav-item nav-link" href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
                                 <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
                                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                                 {%  else  %}
@@ -114,28 +97,16 @@
                                 {% block content %}{% endblock %}
                               </div>
                               
-                                    {% if user.is_authenticated and user.usertype == 'freelance' %}
-                                    <div class="col-md-4">
-                                      <div class="content-section">
-                                        <h3>Notification</h3>
-                                        <p class='text-muted'>You can put any information here you'd like.
-                                    <ul class="list-group">
-                                      <li class="list-group-item list-group-item-light">Latest Posts</li>
-                                      <li class="list-group-item list-group-item-light">Projects</li>
-                                      <li class="list-group-item list-group-item-light">Calendar</li>
-                                      <li class="list-group-item list-group-item-light">Inbox</li>
-                                    </ul>
-                                    {% elif user.is_authenticated and user.usertype == 'business' %}
-                                    <div class="col-md-4">
-                                      <div class="content-section">
-                                        <h3>Notification</h3>
-                                        <p class='text-muted'>You can put any information here you'd like.
-                                    <ul class="list-group">
-                                      <li class="list-group-item list-group-item-light">My Projects</li>
-                                      <li class="list-group-item list-group-item-light">Calendar</li>
-                                      <li class="list-group-item list-group-item-light">Inbox</li>
-                                    </ul>
-                                    {% endif %}
+                              {% if user.is_authenticated and user.usertype == 'freelance' %}
+                              <div class="col-md-4">
+                                <img img src="{%static 'Home_Business/User Guide - Local Artists.png'%}"  alt="Image" height="640" width="340"> </img>
+                               </div>
+
+                              {% elif user.is_authenticated and user.usertype == 'business' %}
+                              <div class="col-md-4">
+                                <img img src="{%static 'Home_Business/User Guide - Sole Proprietors.png'%}"  alt="Image" height="640" width="340"> </img>
+                               </div>
+                              {% endif %}
                                   </p>
                                 </div>
                               </div>
@@ -167,18 +138,11 @@
         <!-- Grid column -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">Businesses</h6>
-          <p>
+          
             <a href="#!">Sole Proprietor 1</a>
-          </p>
-          <p>
             <a href="#!">Sole Proprietor 2</a>
-          </p>
-          <p>
             <a href="#!">Sole Proprietor 3</a>
-          </p>
-          <p>
             <a href="#!">More</a>
-          </p>
         </div>
         <!-- Grid column -->
   
@@ -187,18 +151,10 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">Freelancers</h6>
-          <p>
             <a href="#!">Graphic Illustrators</a>
-          </p>
-          <p>
             <a href="#!">Web designers</a>
-          </p>
-          <p>
             <a href="#!">Artists</a>
-          </p>
-          <p>
             <a href="#!">More</a>
-          </p>
         </div>
   
         <!-- Grid column -->
@@ -207,13 +163,9 @@
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-          <p>
             <i class="fas fa-home mr-3"></i> Malolos, Bulacan</p>
-          <p>
             <i class="fas fa-envelope mr-3"></i> LikHanap@gmail.com</p>
-          <p>
             <i class="fas fa-phone mr-3"></i> 09224893158</p>
-          <p>
             <i class="fas fa-print mr-3"></i> 09777419617</p>
         </div>
         <!-- Grid column -->

@@ -1,6 +1,8 @@
 {%  extends "Home_Business/base.html"  %}
 {%  block content   %} 
-            
+{%   load static   %}
+ 
+{% if user.is_authenticated and user.usertype == 'business' %}
      <article class="media content-section">
           <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
               <div class="media-body">
@@ -8,21 +10,687 @@
                  <a class="mr-2" href="{%  url 'user-posts' object.author.username   %}">{{ object.author }}</a>
                  <small class="text-muted">{{ object.dateposted }}</small>
                  {% if object.author == user %}
+                 {% if object.verified == 'False' %}
                  <div>
-                  <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Post-Update' object.id  %}">Update</a>
-                  <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Post-Delete' object.id  %}">Delete</a>
+                   <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Post-Update' object.id  %}">Update</a>
+                   <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Post-Delete' object.id  %}">Delete</a>
+                  </div>
+                   {% elif object.verified == 'True' %}
+                   <div>
+                     <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Update</a>
+                     <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Delete</a>
+                    </div>
+                   {% endif %}
+              
+              {% endif %}
                  </div>
-                 {% endif %}
-               </div>
                <h1 class="article-title">{{ object.title }}</h2>
-                <p class="article-content">{{ object.content }}</p>
-                <img class="img-responsive"  width="304" height="236"  src="{{ object.image.url }}">
-                <p></p>
-                <p class="article-category">{{ object.category }}</p>
-                <p class="article-location">{{ object.location }}</p>
-                    
+               </br>
+               <h5><b>Project Details:</b></h5>{{ object.content }}</p>
+             </br>
+               <h5><b>Category:</b></h5>{{ object.category }}</p>
+             </br>
+             <h5><b>Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
+                           
+{% if object.street == 'Anilao' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Anilao.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+                
+{% if object.street == 'Atlag' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Atlag.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Babatnin' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Babatnin.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+                
+{% if object.street == 'Bagna' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bagna.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bagong Bayan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bagong Bayan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Balayong' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Balayong.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Balite' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Balite.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bangkal' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bangkal.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Barihan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Barihan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bulihan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bulihan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bungahan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bungahan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Caingin' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Caingin.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Calero' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Calero.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Caliligawan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Caliligawan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Canalate' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Canalate.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Caniogan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Caniogan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Catmon' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Catmon.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Cofradia' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Cofradia.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Dakila' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Dakila.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Guinhawa' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Guinhawa.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Ligas' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Ligas.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Liyang' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Liyang.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Longos' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Longos.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Look 1st' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Look 1st.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Look 2nd' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Look 2nd.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Lugam' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Lugam.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Mabolo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Mabolo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Mambog' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Mambog.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Masile' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Masile.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Matimbo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Matimbo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Mojon' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Mojon.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Namayan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Namayan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Niugan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Niugan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Pamarawan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Pamarawan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Panasahan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Panasahan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Pinagbakahan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Pinagbakahan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Agustin' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Agustin.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Gabriel' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Gabriel.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Juan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Juan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Pablo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Pablo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santiago' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santiago.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santisima Trinidad' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santisima Trinidad.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santo Cristo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santo Cristo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santor' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santor.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santo Niño' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santo Niño.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santo Rosario' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santo Rosario.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Vicente' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Vicente.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Sumapang Bata' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Sumapang Bata.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Sumapang Matanda' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Sumapang Matanda.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Taal' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Taal.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Tikay' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Tikay.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+                <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Projects' %}" role="button">GO TO PROJECTS</a>
+                </br>
+              </br>
              </div>
       </article>
-           
+      {% elif user.is_authenticated and user.usertype == 'freelance' %}
+      <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
+            <div class="media-body">
+              <div class="article-metadata">
+               <a class="mr-2" href="{%  url 'user-posts' object.author.username   %}">{{ object.author }}</a>
+               <small class="text-muted">{{ object.dateposted }}</small>
+               {% if object.author == user %}
+                  {% if object.verified == 'False' %}
+                  <div>
+                    <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Post-Update' object.id  %}">Update</a>
+                    <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Post-Delete' object.id  %}">Delete</a>
+                   </div>
+                    {% elif object.verified == 'True' %}
+                    <div>
+                      <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Update</a>
+                      <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Delete</a>
+                     </div>
+                    {% endif %}
+               
+               {% endif %}
+               
+             </div>
+             <h1 class="article-title">{{ object.title }}</h2>
+                {% if object.verified == 'False' %}
+              <small class="text-muted">LikHanap Verified: {{ object.verified }}❌
+                </small>
+                {% elif object.verified == 'True' %}
+                <small class="text-muted">LikHanap Verified: {{ object.verified }}✔️
+                </small>
+                {% endif %}
+             </br>
+             <br>
+             <h5><b>Project Details:</b></h5>{{ object.content }}</p>
+           </br>
+             <h5><b>Category:</b></h5>{{ object.category }}</p>
+           </br>
+           <h5><b>Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
+                         
+{% if object.street == 'Anilao' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Anilao.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+              
+{% if object.street == 'Atlag' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Atlag.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Babatnin' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Babatnin.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+              
+{% if object.street == 'Bagna' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bagna.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bagong Bayan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bagong Bayan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Balayong' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Balayong.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Balite' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Balite.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bangkal' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bangkal.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Barihan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Barihan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bulihan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bulihan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Bungahan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Bungahan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Caingin' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Caingin.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Calero' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Calero.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Caliligawan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Caliligawan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Canalate' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Canalate.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Caniogan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Caniogan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Catmon' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Catmon.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Cofradia' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Cofradia.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Dakila' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Dakila.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Guinhawa' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Guinhawa.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Ligas' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Ligas.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Liyang' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Liyang.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Longos' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Longos.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Look 1st' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Look 1st.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Look 2nd' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Look 2nd.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Lugam' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Lugam.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Mabolo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Mabolo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Mambog' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Mambog.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Masile' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Masile.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Matimbo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Matimbo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Mojon' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Mojon.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Namayan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Namayan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Niugan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Niugan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Pamarawan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Pamarawan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Panasahan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Panasahan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Pinagbakahan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Pinagbakahan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Agustin' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Agustin.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Gabriel' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Gabriel.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Juan' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Juan.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Pablo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Pablo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santiago' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santiago.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santisima Trinidad' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santisima Trinidad.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santo Cristo' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santo Cristo.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santor' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santor.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santo Niño' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santo Niño.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Santo Rosario' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Santo Rosario.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'San Vicente' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/San Vicente.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Sumapang Bata' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Sumapang Bata.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Sumapang Matanda' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Sumapang Matanda.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Taal' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Taal.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+
+{% if object.street == 'Tikay' %}
+<img src="{%static 'Home_Business/Malolos City Barangays/Tikay.jpg'%}" height="300" width="530" class="center">
+</br>
+</br>
+{% endif %}
+              <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Business' %}" role="button">GO TO PROJECTS</a>
+              </br>
+            </br>
+           </div>
+    </article>
+    {% endif %}
 {%  endblock content   %} 
    

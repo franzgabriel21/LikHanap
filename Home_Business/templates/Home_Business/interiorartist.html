@@ -17,19 +17,35 @@
             </video>   
     </div>
 </div>
-<nav class="navbar navbar-inverse">
-  <div class="navbar navbar-expand-lg text-center navbar-dark black">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'Logo-Artist' %}">LOGOS</a>
-      </div>
-    <ul class="nav navbar-nav">
-      <li class="inactive"></li><a href="% url 'Ad-Artist' %">ADVERTISEMENTS</a></li>
-      <li class="inactive"></li><a href="{% url 'Tarpaulin-Artist' %}">TARPAULINS</a></li>
-      <li class="inactive"></li><a href="{% url 'Invi-Artist' %}">INVITATIONS</a></li>
-      <li class="inactive"></li><a href="{% url 'Interior-Artist' %}">INTERIORS</a></li>    
-    </ul>
-  </div>
-</nav>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="{% url 'Logo-Project' %}">Logo</a>
+  <a href="{% url 'Ad-Project' %}">Advertisement</a>
+  <a href="{% url 'Brandtag-Project' %}">Brand Taglines</a>
+  <a href="{% url 'Visual-Project' %}">Visual Arts</a>
+  <a href="{% url 'Interior-Project' %}">Interior Designs</a>
+  <a href="{% url 'LikHanap-Business2' %}">LikHanap Verified</a>
+
+</div>
+
+<div id="main">
+  
+  <p>Check out all the categories to see what you're looking for.</p>
+  <h1 style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Categories</h1>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
 </br>
 
       <h1 class = "mb-3">Interior Design's Category</h1>
@@ -41,13 +57,13 @@
                 <div class="article-metadata">
       
                   <a class="mr-2">{{ post.author }}</a>
-                  <small class="text-muted">{{ post.dateposted }}</small>
+                  <small class="text-muted">{{ post.dateposted }} |  <a class="mr-2" href="{%  url 'Feedback' %}">Search {{ post.author }}'s Feedbacks</a></small>
                 </div>
                 
                 <h2><a class="article-Expertise" href="{% url 'Portfolio-Detail' post.id %}">{{ post.Expertise }}</a></h2>
                 <p class="article-Background">{{ post.Background}}</p>
                 <p class="article-category">{{ post.category}}</p>
-                <p class="article-location">{{ post.location }}</p>
+                <p class="article-location">{{ post.city }}, {{ post.street }}</p>
                 <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Bid-Create' %}" role="button">Offer</a>
                 
               </div>
