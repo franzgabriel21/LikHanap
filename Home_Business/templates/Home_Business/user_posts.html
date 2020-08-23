@@ -1,5 +1,7 @@
 {%  extends "Home_Business/base.html"  %}
 {%  block content   %} 
+
+{% if user.is_authenticated and user.usertype == 'freelance' %}
             <h1 class = "mb-3">{{  view.kwargs.username  }}'s Posts({{ page_obj.paginator.count }})</h1>
             {% for post in posts %}
             <article class="media content-section">
@@ -39,5 +41,46 @@
       {% endif %}
 
     {% endif %}
+    {% elif user.is_authenticated and user.usertype == 'business' %}
+    <h1 class = "mb-3">{{  user.username  }}'s Public Posted Projects</h1>
+
+    {% for post in posts %}
+    
+    <article class="media content-section">
+      <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+            <div class="media-body">
+              <div class="article-metadata">
+    
+                <a class="mr-2">{{ post.author }}</a>
+                <small class="text-muted">{{ post.dateposted }}</small>
+              </div>
+  
+              <h2><a class="article-title">{{ post.title }}</a></h2>
+              <p class="article-rate"><b>Settled Rate: </b>{{ post.rate}}</p>
+              <p class="article-category"><b>Category:</b> {{ post.category }}</p>
+              <p class="article-status"><b>Project Status:</b> {{ post.status }}</p>
+              {% if post.author == user %}
+              <div class="form-group">
+                <a class= "btn btn-warning" href="{% url 'UserPost-Detail' post.id %}">Update</a> <a class="btn btn-outline-warning" href="{%  url 'LikHanap-Bids' %}" role="button"> Back &laquo;</a>
+             </div>
+             {% endif %}
+            </div>
+          </article>
+        
+    {% endfor %}
+    {% if is_paginated %}
+  
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+  
+            {% endif %}
+            {% endif %}
+            
+
 {%  endblock content   %} 
    

@@ -42,44 +42,45 @@
           
           {% if user.is_authenticated and user.usertype == 'business'  %}
           <!--<a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>-->
-          <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
-          <a class="nav-item nav-link" href="{% url 'LikHanap-Freelance' %}">Freelancers</a>
+          <a class="nav-item nav-link" href="{% url 'LikhanapFeedback' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'findartists' %}">Artists</a>
           <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
           <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
-          <a class="active" href="{% url 'Accept' %}">Inbox</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Project Status</a>
           <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
-          <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
                  
            
               </div>
           {% endif %}
-        <!-- Navbar Right Side -->
+            {% if user.is_authenticated and user.usertype == 'business'  %}
+            <!-- Navbar Right Side -->
 
-        <div class="navbar-nav">
-          {%  if user.is_authenticated  %}
-          <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
-          <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
-          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-          {%  else  %}
-          <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-          <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
-          {%  endif  %}
+          <div class="navbar-nav">
+            {%  if user.is_authenticated  %}
+            <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+            <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+            <a class="active" href="{% url 'Accept' %}">Inbox</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {%  else  %}
+            <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            {%  endif  %}
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-</header>
-<main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {%  if messages  %}
-              {%  for message in messages  %}
-                  <div class="alert alert-{{ message.tags }}">
-                       {{ message }}
-                      </div>
-              {%  endfor  %}
-          {%  endif  %}
-         
+    </nav>
+  </header>
+  <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {%  if messages  %}
+                {%  for message in messages  %}
+                    <div class="alert alert-{{ message.tags }}">
+                         {{ message }}
+                        </div>
+                {%  endfor  %}
+            {%  endif  %}
+         {%  endif  %} 
         </div>
 </main>
 </body>
@@ -94,13 +95,14 @@
                     <div class="media-body">
                       <div class="article-metadata">
             
-                        <b class="mr-2">{{ post.author }}</b>
+                       
+                        <p class="article-author">{{ post.author }}</p>
                         <small class="text-muted">{{ post.dateposted }}</small>
                       </div>
                       <p class="article-Message">{{ post.Message }}</p>
                       <p class="article-Business_username">{{ object.Business_username }}</p>   
                       <div class="form-group">
-                        <a class= "btn btn-primary btn-sm w-5 lead" href="{% url 'Employ-Create' %}" role="button">REPLY</a>
+                       <a href="{% url 'Employ-Create' %}" class="btn btn-success"> Talk to your Artist! </a>
                        </div>
                      
                     </div>

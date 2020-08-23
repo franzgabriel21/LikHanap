@@ -1,0 +1,206 @@
+{%  extends "Home_Business/base.html"  %}
+{%   load static   %}
+{%  block content   %} 
+{% if user.is_authenticated and user.usertype == 'freelance' %}
+<div class="jumbotron jumbotron-fluid  ">
+  <div class="container text-center text-lg-left">
+    
+      <div class="container col-lg-15 text-white">
+          <h1 class="display-4 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
+  <p class="lead">A platform for connecting freelance graphic artists and web designers to sole proprietors and linking local artists to local consumers.</p>
+        <span class="text-center d-inline-block">
+          {% if user.is_authenticated and user.verified == 'False' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'prescreen' %}" role="button">Post an application</a>
+          {% elif user.is_authenticated and user.verified == 'True' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>
+          {% endif %}  
+          <p class=" lead text-white">Create now!</p>
+        </span>
+      </div>
+          <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
+              <source src="{%static 'Home_Business/jumbotron_miniclip.mp4'%}" type="video/mp4" />
+            </video>   
+    </div>
+</div>
+{% endif %}
+{% if user.is_authenticated and user.usertype == 'business' %}
+<div class="jumbotron jumbotron-fluid  ">
+  <div class="container text-center text-lg-left">
+    
+      <div class="container col-lg-15 text-white">
+          <h1 class="display-4 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
+  <p class="lead">A platform for connecting freelance graphic artists and web designers to sole proprietors and linking local artists to local consumers.</p>
+        <span class="text-center d-inline-block">
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Post-Create' %}" role="button">Post a project commission</a>
+        <p class=" lead text-white">Create now!</p>
+        </span>
+      </div>
+          <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
+              <source src="{%static 'Home_Business/jumbotron_miniclip.mp4'%}" type="video/mp4" />
+            </video>   
+    </div>
+</div>
+{% endif %}
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="{% url 'Logo-Project' %}">Logo</a>
+  <a href="{% url 'Signage-Project' %}">Signage</a>
+  <a href="{% url 'Bannerads-Project' %}">Banner Ads</a>
+  <a href="{% url 'WebDesigns-Project' %}">Web Designs</a>
+
+
+</div>
+
+<div id="main">
+  
+  <p>Check out all the categories to see what you're looking for.</p>
+  <h1 style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Categories</h1>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+</br>
+      <h1 class = "mb-3">Web Design's Category</h1>
+    </br>
+    <div class="container">
+      <img src="{%static 'Home_Business/minimalist.png'%}" height="80" width="700" class="center">
+      <div class="panel panel-default">
+        <div class="panel-body">
+      {% for post in webdesignsproject %}
+      {% if post.category == "WEB DESIGNS" %}
+      {% if post.theme == "MINIMALIST" %}
+      <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+              <div class="media-body">
+                <div class="article-metadata">
+                  
+                  <a class="mr-2" href="{%  url 'user-posts' post.author.username   %}">{{ post.author }}</a>
+                  <small class="text-muted">{{ post.dateposted }}</small>
+                </div>
+                {% if user.is_authenticated and user.usertype == 'freelance' %}
+                    <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+                <p class="article-category">{{ post.category }}</p>
+                <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+                {% if user.is_authenticated and user.verified == 'False' %}
+                <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'prescreen' %}" role="button">Apply</a>
+                {% elif user.is_authenticated and user.verified == 'True' %}
+                <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Apply-Create' %}" role="button">Apply</a>
+                {% endif %}
+
+                {% endif %}
+                {% if user.is_authenticated and user.usertype == 'business' %}
+                <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+                <p class="article-category">{{ post.category }}</p>
+                <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+                {% endif %}
+              </div>
+            </article>
+              {% endif %}   
+              {% endif %} 
+      {% endfor %}
+    </div> 
+  </div>
+  </div>
+
+</br>
+<div class="container">
+  <img src="{%static 'Home_Business/modern.png'%}" height="80" width="700" class="center">
+  <div class="panel panel-default">
+    <div class="panel-body">
+  {% for post in webdesignsproject %}
+  {% if post.category == "WEB DESIGNS" %}
+  {% if post.theme == "MODERN" %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              
+              <a class="mr-2" href="{%  url 'user-posts' post.author.username   %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.dateposted }}</small>
+            </div>
+            {% if user.is_authenticated and user.usertype == 'freelance' %}
+                <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            <p class="article-category">{{ post.category }}</p>
+            <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+            {% if user.is_authenticated and user.verified == 'False' %}
+            <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'prescreen' %}" role="button">Apply</a>
+            {% elif user.is_authenticated and user.verified == 'True' %}
+            <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Apply-Create' %}" role="button">Apply</a>
+            {% endif %}
+
+            {% endif %}
+            {% if user.is_authenticated and user.usertype == 'business' %}
+            <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            <p class="article-category">{{ post.category }}</p>
+            <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+            {% endif %}
+          </div>
+        </article>
+          {% endif %}   
+          {% endif %} 
+  {% endfor %}
+</div> 
+</div>
+</div>
+
+</br>
+<div class="container">
+  <img src="{%static 'Home_Business/innovative.png'%}" height="80" width="700" class="center">
+  <div class="panel panel-default">
+    <div class="panel-body">
+  {% for post in webdesignsproject %}
+  {% if post.category == "WEB DESIGNS" %}
+  {% if post.theme == "INNOVATIVE" %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              
+              <a class="mr-2" href="{%  url 'user-posts' post.author.username   %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.dateposted }}</small>
+            </div>
+            {% if user.is_authenticated and user.usertype == 'freelance' %}
+                <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            <p class="article-category">{{ post.category }}</p>
+            <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+            {% if user.is_authenticated and user.verified == 'False' %}
+            <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'prescreen' %}" role="button">Apply</a>
+            {% elif user.is_authenticated and user.verified == 'True' %}
+            <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Apply-Create' %}" role="button">Apply</a>
+            {% endif %}
+
+            {% endif %}
+            {% if user.is_authenticated and user.usertype == 'business' %}
+            <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            <p class="article-category">{{ post.category }}</p>
+            <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+            {% endif %}
+          </div>
+        </article>
+          {% endif %}   
+          {% endif %} 
+  {% endfor %}
+</div> 
+</div>
+</div>
+
+</br>
+{%  endblock content   %} 
+   

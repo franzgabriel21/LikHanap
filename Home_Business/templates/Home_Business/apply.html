@@ -24,6 +24,7 @@
                 {% endif %}
         </head>
         <body>
+          <body style="background-color:#FFF8DC"></body>
              <header class="site-header">
                 
                         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -43,44 +44,58 @@
                             <div class="collapse navbar-collapse" id="navbarToggle">
                               <div class="navbar-nav mr-auto">
                             {% if user.is_authenticated and user.usertype == 'business'  %}
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-Freelance' %}">Freelancers</a>
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
-                                <a class="active" href="{% url 'LikHanap-Apply' %}">Applicants</a>
-                                <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
-                                <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+                            <a class="nav-item nav-link" href="{% url 'LikhanapFeedback' %}">Home</a>
+                            <a class="nav-item nav-link" href="{% url 'findartists' %}">Artists</a>
+                            <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
+                            <a class="active" href="{% url 'LikHanap-Apply' %}">Applicants</a>
+                            <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Project Status</a>
+                            <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+                       
                 
-                           
+                             <form >
+                            <div class="searchBox">
+                            <input class="searchInput "type="search" name="q" placeholder="Search...." value={{query}} >
+                            <button class="searchButton" type="submit">
+                              <i class="material-icons">
+                                search
+                              </i>
+                              </button>
+                              </div>
+                              </form>
+                              </div>
              
                                        
                                 {% endif %}
-                              <!-- Navbar Right Side -->
 
-                              <div class="navbar-nav">
-                                {%  if user.is_authenticated  %}
-                                <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
-                                <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
-                                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                                {%  else  %}
-                                <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
-                                {%  endif  %}
+                                  {% if user.is_authenticated and user.usertype == 'business'  %}
+                                  <!-- Navbar Right Side -->
+  
+                                <div class="navbar-nav">
+                                  {%  if user.is_authenticated  %}
+                                  <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+                                  <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+                                  <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+                                  <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                                  {%  else  %}
+                                  <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                                  <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+                                  {%  endif  %}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </nav>
-                      </header>
-                      <main role="main" class="container">
-                            <div class="row">
-                              <div class="col-md-8">
-                                {%  if messages  %}
-                                    {%  for message in messages  %}
-                                        <div class="alert alert-{{ message.tags }}">
-                                             {{ message }}
-                                            </div>
-                                    {%  endfor  %}
-                                {%  endif  %}
+                          </nav>
+                        </header>
+                        <main role="main" class="container">
+                              <div class="row">
+                                <div class="col-md-8">
+                                  {%  if messages  %}
+                                      {%  for message in messages  %}
+                                          <div class="alert alert-{{ message.tags }}">
+                                               {{ message }}
+                                              </div>
+                                      {%  endfor  %}
+                                  {%  endif  %}
+                               {%  endif  %}
 
      <h1 class = "mb-3">{{  user.username  }}'s Artists Applications</h1>
 
@@ -97,9 +112,11 @@
           <h2><a class="article-Expertise" href="{% url 'Apply-Detail' post.id %}">{{ post.Expertise }}</a></h2>
           <p class="article-content"><b>Background: </b>{{ post.Background}}</p>
           <p class="article-category"><b>Category:</b> {{ post.category }}</p>
+          <p class="article-theme"><b>Theme:</b> {{ post.theme }}</p>
           <p class="article-location"><b>Location:</b> {{ post.city }}, {{ post.street }}</p> 
           <div class="form-group">
-          <a class= "btn btn-primary btn-sm w-5 lead" href="{% url 'LikHanap-Terms' %}">Accept</a>
+         <a class= "btn btn-info" href="{% url 'LikHanap-Terms' %}">Accept</a>
+            
         </div>
                     </div>
                   </article>
@@ -123,55 +140,8 @@
                              {% if user.is_authenticated and user.usertype == 'business' %}
                              
         <div class="col-md-4">
-          <style>
-            .alert {
-              padding: 20px;
-              background-color: #91dcff;
-              color: rgb(0, 0, 0);
-            }
-            
-            .closebtn {
-              margin-left: 15px;
-              color:#FF0000;
-              font-weight: bold;
-              float: right;
-              font-size: 22px;
-              line-height: 20px;
-              cursor: pointer;
-              transition: 0.3s;
-            }
-            
-            .closebtn:hover {
-              color: black;
-            }
-            </style>
-          <div class="content-section">
-            <h3>Notifications <img src="/media/notif.gif" height="50" width="50" class="center"></h3> 
-            
-            <b><p style="color:#FF0000";>Newest Commissions! </p></b>
-        <ul class="list-group">
-          {% for post in applies %}
-          {% if user.username == post.Business_username %}
-  
-     
-                 <div class="media-body">
-                  
          
-                    <div class="alert">
-                      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                      <b><a class="mr-2">{{ post.Expertise }} | </a></b>
-                      <small class="text-muted"><b>Category:</b> {{ post.category }} <a class="btn btn-secondary btn-sm w-20 lead" href="{% url 'Apply-Detail' post.id %}" role="button">See More Details</a> </small>
-                    </div> 
-                        
-                    </div>
-                    
-                 
-                             
-               
-           
-               {% endif %}
-         {% endfor %}
-        </ul>
+            <img img src="{%static 'Home_Business/LFA/hans.png'%}"  alt="Image" height="620" width="380"> </img>        </ul>
   </p>
   </div>                                
   {% endif %}

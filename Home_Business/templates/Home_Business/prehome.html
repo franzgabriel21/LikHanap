@@ -1,61 +1,154 @@
 {%  extends "Home_Business/base.html"  %}
 {% load static %}
-{%  block content   %} 
+{%  block content   %}
 {% if user.is_authenticated  %}
 <meta http-equiv = "refresh" content = "0; url ={% url 'LikHanap-Business' %}" />      
 {% endif %}
-      
-      
+     
+<!DOCTYPE html>
+<html>
+ 
 
-            <div class="left">
-                <img img src="{%static 'Home_Business/Pre Home Page Banner.jpg'%}" alt="Image" height="350" width="1343" style="margin:-20px 0px 0px -117px;" type="image"> </img>
-        
-               <p></p> <span class="text-center d-inline-block">
-          <a class="btn btn-primary btn-lg w-100" href="{% url 'register' %}" role="button">Register now!</a>
-          <small class ="text-black">
-                  If you already have an account <a class = "text-blue ml-2" href="{% url 'login' %}">Login now</a>
-              </small>
-        </span>
-            <br><br>
-                <p></p> <img img src="{%static 'Home_Business/How it works Business side.png'%}" style="margin:30px 50px 0px 50px;" type="image"> </img>
-                <br><br>
+        <head>
+                        <!-- Required meta tags -->
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+                      
+                        <!-- Bootstrap CSS -->
+                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+                        <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+                       
+                       
+                {% if title %}
+                <title> LikHanap - {{title}}</title>
+                {% else %}
+                <title>LikHanap </title>
+                {% endif %}
+
                 
-                <style>
-                    
-                    h1 {
-                        text-indent: 380px;
-                      text-transform: uppercase;
-                      color: rgb(24, 185, 132);
-                    }
-                    h2 {
-                        text-indent: 370px;
-                      text-transform: uppercase;
-                      color: rgb(126, 24, 185);
-                    }
-                    p {
-                    margin:0px -250px 0px 100px;
-                      text-align: justify;
-                      letter-spacing: 1px;
-                    }
-                </style>
-                    <br><br>
-                    <h2><strong>Sole Proprietors</strong></h2><br>
-                    <p>Laying foundations in brand development needs experts to get it done. May it be logos, advertisements, layout commissions or web projects; Likhanap will help Small Business Owners to have a place where it’s easier to find Freelance Artists providing these Sole Proprietors with more options and freedom in choosing the right freelancers to cater their needs. </p>
-                <br><br><br>
-                <p></p> <img img src="{%static 'Home_Business/How it works Freelancer side.png'%}" style="margin:15px 50px 0px 50px;" type="image"> </img>
-                <br><br><br><br>
-                <h1><strong>Local Artists</strong></h1><br>
-                    <p>
-                      Local artists are facing a big challenge in terms of prime or financial stability. A useful way of producing a stable level of income is by commissioning art works. Here at Likhanap, we are constantly aiming to expose our artists to the high demands of art project commissions, be it in a form of; Digital Arts, Multimedia or even Freehand, we will do our best to make them accessible to those who need their help.</p><br><br><br>
-                        
-                <p></p> <img img src="{%static 'Home_Business/Services-Offered.png'%}" type="image"> </img>
-        
-            <style></style>
-          </div>
-        </br>
-      </br>
-    </br>
-  </br>
-{%  endblock content   %} 
-   
-  
+        </head>
+        <body>
+          <body style="background-color:#FFF8DC"></body>
+             <header class="site-header">
+              <div class="right">
+                        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+                          <div class="container">
+                              {% if user.is_authenticated  %}
+                                <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}">
+                              {% else %}3
+                                <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+                              {% endif %}
+                              <span class='span-logo'>
+                                <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+                            </span></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarToggle">
+                              <div class="navbar-nav mr-auto">
+                             
+                               
+
+          <a class="nav-item nav-link" href="{% url 'categories' %}">Categories</a>
+          <a class="nav-item nav-link" href="{% url 'howitworks' %}">How it Works</a>
+          <a class="nav-item nav-link" href="{% url 'FAQ' %}">FAQ's</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+
+
+             </div>
+            </div>                      
+                             
+                              <!-- Navbar Right Side -->
+
+                              <div class="navbar-nav">
+                               
+                                <a class="btn btn-secondary btn-lg w-100" href="{% url 'login' %}" role="button">Log In</a>
+                               
+                              </div>
+                            </div>
+                          </div>
+                        </nav>
+                      </header>
+                      <main role="main" class="container">
+                            <div class="row">
+                              <div class="col-md-8">
+                                {%  if messages  %}
+                                    {%  for message in messages  %}
+                                        <div class="alert alert-{{ message.tags }}">
+                                             {{ message }}
+                                            </div>
+                                    {%  endfor  %}
+                                {%  endif  %}
+                              </div>
+                            </div>
+                            <style>
+                              .fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+h1{
+  color: #f1f1f1;
+}
+h5{
+  color: #f1f1f1;
+}
+                            </style>
+                            <div class="fullscreen-bg">
+
+                              <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
+                               <source src="{%static 'Home_Business/jumbotron_prehome.mp4'%}" type="video/mp4">
+                             </video>
+                            </div>
+                            <div class="content">
+                               <h1>LikHanap</h1>
+                               <h5>A web-App that provides a safe environment for both Business Owners and Artists who are looking for the right and qualified</h5><h5>brand partners with just a simple click!</h5>
+                               <a class="btn btn-success btn-lg" href="{% url 'registration' %}" role="button">Register</a>
+                             </div>
+                             </body>
+                            </br>
+                          </br>
+                        </br>
+                      </br>
+                            </br>
+                          </br>
+                        </br>
+                      </br>
+                                </br>
+                              </br>
+                            </br>
+                          </br>
+                        </br>
+                      </br>
+                    </br>
+                  </br>
+                </br>
+                              </br>
+                              
+
+
+                                
+          </html>
+{%  endblock content   %}

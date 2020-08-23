@@ -3,6 +3,7 @@
 {%   load static   %}
  
 {% if user.is_authenticated and user.usertype == 'business' %}
+{% if object.status == '---' %}
      <article class="media content-section">
           <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
               <div class="media-body">
@@ -10,17 +11,10 @@
                  <a class="mr-2" href="{%  url 'user-posts' object.author.username   %}">{{ object.author }}</a>
                  <small class="text-muted">{{ object.dateposted }}</small>
                  {% if object.author == user %}
-                 {% if object.verified == 'False' %}
                  <div>
                    <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Post-Update' object.id  %}">Update</a>
                    <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Post-Delete' object.id  %}">Delete</a>
                   </div>
-                   {% elif object.verified == 'True' %}
-                   <div>
-                     <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Update</a>
-                     <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Delete</a>
-                    </div>
-                   {% endif %}
               
               {% endif %}
                  </div>
@@ -29,6 +23,8 @@
                <h5><b>Project Details:</b></h5>{{ object.content }}</p>
              </br>
                <h5><b>Category:</b></h5>{{ object.category }}</p>
+              </br>
+              <h5><b>Theme:</b></h5>{{ object.theme }}</p>
              </br>
              <h5><b>Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
                            
@@ -342,35 +338,21 @@
               </br>
              </div>
       </article>
-      {% elif user.is_authenticated and user.usertype == 'freelance' %}
+      {% endif %}
+      {% endif %}
+      {% if user.is_authenticated and user.usertype == 'freelance' %}
+      {% if object.status == '---' %}
       <article class="media content-section">
         <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
             <div class="media-body">
               <div class="article-metadata">
                <a class="mr-2" href="{%  url 'user-posts' object.author.username   %}">{{ object.author }}</a>
-               <small class="text-muted">{{ object.dateposted }}</small>
-               {% if object.author == user %}
-                  {% if object.verified == 'False' %}
-                  <div>
-                    <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Post-Update' object.id  %}">Update</a>
-                    <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Post-Delete' object.id  %}">Delete</a>
-                   </div>
-                    {% elif object.verified == 'True' %}
-                    <div>
-                      <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Update</a>
-                      <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'VerifiedPost' object.id  %}">Delete</a>
-                     </div>
-                    {% endif %}
-               
-               {% endif %}
-               
+               <small class="text-muted">{{ object.dateposted }}</small>        
              </div>
              <h1 class="article-title">{{ object.title }}</h2>
-                {% if object.verified == 'False' %}
-              <small class="text-muted">LikHanap Verified: {{ object.verified }}❌
-                </small>
-                {% elif object.verified == 'True' %}
-                <small class="text-muted">LikHanap Verified: {{ object.verified }}✔️
+                
+                {% if user.verified == 'True' %}
+                <small class="text-muted">LikHanap Verified: {{ user.verified }}✔️
                 </small>
                 {% endif %}
              </br>
@@ -378,6 +360,8 @@
              <h5><b>Project Details:</b></h5>{{ object.content }}</p>
            </br>
              <h5><b>Category:</b></h5>{{ object.category }}</p>
+            </br>
+            <h5><b>Theme:</b></h5>{{ object.theme }}</p>
            </br>
            <h5><b>Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
                          
@@ -692,5 +676,221 @@
            </div>
     </article>
     {% endif %}
+    {% endif %}
+   
+    {% if object.status == 'Cancelled' %}
+    <div class="article-metadata">
+      <html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #b8b8b8;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+  
+  
+
+<table>
+  <tr>
+    <td style="text-align:center"><b>Project Title</b></th>
+    <td style="text-align:center"><b>Date Posted</b></th>
+    <td style="text-align:center"><b>Settled Rate</b></th>
+    <td style="text-align:center"><b>Category</b></th>
+    <td style="text-align:center"><b>Project Status</b></th>
+  </tr>
+  <tr>
+    <td style="text-align:center">{{ object.title }}</td>
+    <td style="text-align:center">{{ object.dateposted }}</td>
+    <td style="text-align:center">{{ object.rate}}</td>
+    <td style="text-align:center">{{ object.category }}</td>
+    <td style="text-align:center"><b><p style="color:rgba(197, 20, 20, 0.856)">{{ object.status }}</p></b></td>
+  </tr>
+  </table>
+
+</body>
+</html>
+</br>
+</br>
+</br>
+          <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Bids' %}" role="button">Back &laquo;</a>
+        </br>
+      </br>
+        </div> 
+      </article>  
+      {% endif %}
+      {% if object.status == 'Ongoing' %}
+      <div class="article-metadata">
+        <html>
+  <head>
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #b8b8b8;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+  </head>
+  <body>
+    
+  <table>
+    <tr>
+      <td style="text-align:center"><b>Project Title</b></th>
+      <td style="text-align:center"><b>Date Posted</b></th>
+      <td style="text-align:center"><b>Settled Rate</b></th>
+      <td style="text-align:center"><b>Category</b></th>
+      <td style="text-align:center"><b>Project Status</b></th>
+    </tr>
+    <tr>
+      <td style="text-align:center">{{ object.title }}</td>
+      <td style="text-align:center">{{ object.dateposted }}</td>
+      <td style="text-align:center">{{ object.rate}}</td>
+      <td style="text-align:center">{{ object.category }}</td>
+      <td style="text-align:center"><b><p style="color:rgba(7, 141, 41, 0.856)">{{ object.status }}</p></b></td>
+    </tr>
+    </table>
+  
+  </body>
+  </html>
+</br>
+</br>
+</br>
+            <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Bids' %}" role="button">Back &laquo;</a>
+          </br>
+        </br>
+          </div> 
+        </article>  
+      {% endif %}
+
+    {% if object.status == 'Completed' %}
+    <div class="article-metadata">
+      <html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #b8b8b8;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+div {
+  margin-bottom: 10px;
+  padding: 4px 10px;
+}
+  .success {
+  background-color: #ddffdd;
+  border-left: 6px solid #4CAF50;
+}
+
+</style>
+</head>
+<body>
+  
+
+<table>
+  <tr>
+    <td style="text-align:center"><b>Project Title</b></th>
+    <td style="text-align:center"><b>Date Posted</b></th>
+    <td style="text-align:center"><b>Settled Rate</b></th>
+    <td style="text-align:center"><b>Category</b></th>
+    <td style="text-align:center"><b>Project Status</b></th>
+  </tr>
+  <tr>
+    <td style="text-align:center">{{ object.title }}</td>
+    <td style="text-align:center">{{ object.dateposted }}</td>
+    <td style="text-align:center">{{ object.rate}}</td>
+    <td style="text-align:center">{{ object.category }}</td>
+    <td style="text-align:center"><b><p style="color:rgba(28, 11, 180, 0.856)">{{ object.status }}</p></b></td>
+  </tr>
+  </table>
+</br>
+</br>
+</br>
+  <div class="row" style= "margin:-20px 0px 0px 10px;"> 
+  <div class="col-6">
+    <h4>Contract Agreement:</h4>
+    
+      <a href= "{{ object.contract.url }}" download> 
+        <img src="{{ object.contract.url }}" alt="contract" width="250" height="350">
+      </br>
+    </br>
+        <p><b>Download Contract</b></p>
+      </a>
+    </div>
+    
+      {% if object.category == "WEB DESIGNS" %}
+      <div class="col-6">
+      <h4>Ownership Certificate:</h4>
+      <a href= "{{ object.certificate.url }}" download> 
+          <img src="{{ object.certificate.url }}" alt="certificate" width="300" height="200">
+        </br>
+      </br>
+          <p><b>Download Certificate</b></p>
+        </a>
+     </div>
+     {% elif object.category == "LOGO" %}
+     <div class="col-5">
+      <div class="success">
+        <strong> Unlock your Certificate!</strong><p> Rate Us!</p>
+      </div> 
+      <h4>Ownership Certificate:</h4>
+      <a href= "{{ object.certificate.url }}" download> 
+          <img src="{{ object.certificate.url }}" alt="certificate" width="300" height="200">
+        </br>
+      </br>
+          <p><b>Download Certificate</b></p>
+        </a>
+       
+          <a href="{% url 'LikhanapFeedback-Create' %}" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-star"></span> Give us a Rating! <img src="{%static 'Home_Business/ratings.png'%}" height="50" width="50" class="center">
+          </a>
+     </div>
+    
+     {% endif %}
+    </div>
+  </body>
+</br>
+<a class="btn btn-outline-secondary" href="{% url 'LikHanap-Bids' %}" role="button">Back &laquo;</a>
+</br>
+</br>
+
+</div> 
+   </article>  
+</body>
+</html> 
+ {% endif %}
+
 {%  endblock content   %} 
    

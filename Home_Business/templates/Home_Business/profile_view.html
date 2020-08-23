@@ -21,6 +21,59 @@
                       <b>I am a: </b>Freelancer
                       <br>
                       <br>
+                      <style>
+                        .collapsible {
+                          background-color: rgb(255, 255, 255);
+                          color: rgb(0, 0, 0);
+                          cursor: pointer;
+                          padding: 18px;
+                          width: 100%;
+                          border: none;
+                          text-align: left;
+                          outline: none;
+                          font-size: 15px;
+                        }
+                        
+                        .active, .collapsible:hover {
+                          background-color: #b49696;
+                        }
+                        
+                        .content {
+                          padding: 0 18px;
+                          display: none;
+                          overflow: hidden;
+                          background-color: #f1f1f1;
+                        }
+                        </style>
+                      <button type="button" class="collapsible"><b>Prescreened: </b>{{ user.verified }}</button>
+                        
+                        <div class="content">
+                        </br>
+                          <p> For pre screening, kindly click on the proceed button to begin on your interview.</b>
+                            </p>
+                        <a class="btn btn-outline-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdNJD__4vxkk7yKq6Goa2NGiSATXsFiBdRWTrtqYFAbW8B-fA/viewform" role="button">Proceed &raquo;</a>
+                      </br>
+                        </br>
+                        
+                        </div>
+                        <br>
+                      
+                        <script>
+                        var coll = document.getElementsByClassName("collapsible");
+                        var i;
+
+                        for (i = 0; i < coll.length; i++) {
+                          coll[i].addEventListener("click", function() {
+                            this.classList.toggle("active");
+                            var content = this.nextElementSibling;
+                            if (content.style.display === "block") {
+                              content.style.display = "none";
+                            } else {
+                              content.style.display = "block";
+                            }
+                          });
+                        }
+                        </script>
                       {% elif user.is_authenticated and user.usertype == 'business' %}
                       <b>I am a: </b>Business
                       <br>
@@ -52,8 +105,13 @@
                       <button type="button" class="collapsible"><b>Verified: </b>{{ user.verified }}</button>
                         
                         <div class="content">
-                          <p>To verify your account, kindly send your, Name of the business and DTI/Sec number for confirmation at <b>cs.likhanap@gmail.com</b>
-                            .</p>
+                        </br>
+                          <p>To verify your account, kindly click on the proceed button and fill up all the necessary information regarding your business details</h6> 
+                                  </br>
+                                </br>
+    <a class="btn btn-outline-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc-ec1NMbrmVdATh2die67LTYqUsBylhl6pzVLBX5Neqn-8eQ/viewform?usp=sf_link" role="button">Proceed &raquo;</a>
+                                  </br>
+                                
                         </div>
                         <br>
                       

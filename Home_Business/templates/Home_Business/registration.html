@@ -1,0 +1,171 @@
+
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+{%   load static   %}
+      
+<!DOCTYPE html>
+<html>
+  
+
+        <head>
+                        <!-- Required meta tags -->
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+                    
+                        <!-- Bootstrap CSS -->
+                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+                        <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+                        
+                       
+                {% if title %}
+                <title> LikHanap - {{title}}</title>
+                {% else %}
+                <title>LikHanap </title>
+                {% endif %}
+        </head>
+        <body>
+          <body style="background-color:#FFF8DC"></body>
+             <header class="site-header">
+              <div class="right">
+                        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top"> 
+                          <div class="container">
+                              {% if user.is_authenticated  %}
+                                <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}"> 
+                              {% else %}3
+                                <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+                              {% endif %} 
+                              <span class='span-logo'> 
+                                <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+                            </span></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarToggle">
+                              <div class="navbar-nav mr-auto">
+                             
+                                
+
+          <a class="nav-item nav-link" href="{% url 'categories' %}">Categories</a>
+          <a class="nav-item nav-link" href="{% url 'howitworks' %}">How it Works</a>
+          <a class="nav-item nav-link" href="{% url 'FAQ' %}">FAQ's</a>
+
+             </div>
+            </div>                      
+
+</nav>
+
+</header>
+    
+   
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .flip-box {
+    background-color: transparent;
+    width: 300px;
+    height: 300px;
+    border: transparent;
+    perspective: 1000px;
+  }
+  
+  .flip-box-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-box:hover .flip-box-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-box-front, .flip-box-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-box-front {
+    background-color: transparent;
+    color: black;
+  }
+  
+  .flip-box-back {
+    background-color:transparent;
+    color: white;
+    transform: rotateY(180deg);
+  }
+  h5 {
+    margin:10px 0px 100px 40px;
+        color: rgb(255, 255, 255);
+      }
+      .row {
+        text-align:center;
+        margin-left: 110px;
+      }
+      h1 {
+      margin:0px -100px 0px 100px;
+        text-align: center;
+        letter-spacing: 2px;
+      }
+  </style>
+  <h1>Register As...</h1>
+  </br>
+  </head>
+  <body>
+    <div class="row container">  
+      <div>
+    </br>
+  <div class="flip-box">
+    <div class="flip-box-inner">
+      <div class="flip-box-front">
+        <img src="{%static 'Home_Business/artist.png'%}" height="300" width="300" class="center">
+      </div>
+      <div class="flip-box-back">
+      </br>
+    </br>
+  </br>
+</br>
+</br>
+        <a class="btn btn-outline-info" href="{% url 'register' %}" role="button">Register Now &raquo;</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+    </br>
+  <div class="flip-box">
+    <div class="flip-box-inner">
+      <div class="flip-box-front">
+        <img src="{%static 'Home_Business/businessowner.png'%}" height="300" width="300" class="center">
+      </div>
+      <div class="flip-box-back">
+      </br>
+    </br>
+  </br>
+</br>
+</br>
+        <a class="btn btn-outline-info" href="{% url 'register' %}" role="button">Register Now &raquo;</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>
+  
+   </html>
+{%  endblock content   %} 
+   

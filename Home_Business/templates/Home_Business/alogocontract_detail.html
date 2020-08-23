@@ -1,0 +1,58 @@
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+       <table class="center" style= "color: rgb(0, 102, 77)">
+          <tr>
+              
+               <th style="text-align:center">Project Category:</th>
+               <th style="text-align:center">Artist Full Name:</th>
+              <th style="text-align:center">Address:</th>
+               <th style="text-align:center">Signature:</th>
+          </tr>
+          <tr>
+               
+               <td style="text-align:center">{{ object.category }}</td>
+               <td style="text-align:center">{{ object.artistname }}</td>
+               <td style="text-align:center">{{ object.address }}</td>
+               <td style="text-align:center"><img src="{{ object.image.url }}" height="50" width="100" class="center"></td>
+          </tr>      
+          </table>
+     </br>
+         <div><a class="btn btn-outline-success" href="{% url 'contractlist' %}" role="button">Proceed &raquo;</a> <a class= "btn btn-outline-info" href="{%  url 'ALogoContract-Update' object.id  %}">Update</a>
+           <a class= "btn btn-outline-danger" href="{%  url 'ALogoContract-Delete' object.id  %}">Delete</a>
+          </div>
+          
+     </br>
+     <style>
+ 
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #7c7c7c;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #00a16349;
+  }
+            
+            
+          </style>
+      
+     
+    
+      </br>
+      </br>
+             
+          
+      </article>
+           
+{%  endblock content   %} 
+   

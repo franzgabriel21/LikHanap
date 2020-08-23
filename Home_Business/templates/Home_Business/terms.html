@@ -27,6 +27,13 @@
       </br>
       </br> 
       </br>
+      <b>For Business Owner Users</b>
+      </br> 
+      </br>   
+      <p>LikHanap wants to maintain the quality of its service and is requiring users to constantly update the status of every project deals within the website. Making reviews regarding artists also contribute in a large scale in order to improve the system and to inspire the Artists to provide the best results possible.</p> 
+      </br>
+      </br> 
+      </br>  
       <b>Changes</b>
       </br>
       </br> 
@@ -42,13 +49,13 @@
       <p>
         If you have any questions about these Terms, please contact us.
         </p>
-        <a class="btn btn-outline-danger" href="{% url 'LikHanap-Apply' %}">DECLINE</a>
-        <a class= "btn btn-primary btn-sm w-5 lead" href="{% url 'Employ-Create' %}" role="button">ACCEPT THE TERMS</a>
+        <a class="btn btn-danger" href="{% url 'LikHanap-Apply' %}">DECLINE</a>
+        <a class= "btn btn-info" href="{% url 'contractcategory' %}" role="button">ACCEPT THE TERMS</a>
       </div>
 
-      {% endif %}
+      
 
- {% if user.is_authenticated and user.usertype == 'freelance' %}
+ {% elif user.is_authenticated and user.usertype == 'freelance' %}
  <div class="container">
   <h3><b>LikHanap Terms and Conditions</b></h3>
   </br>
@@ -89,8 +96,8 @@
   <p>
     If you have any questions about these Terms, please contact us.
     </p>
-    <a class="btn btn-outline-danger" href="{% url 'LikHanap-Bids' %}">DECLINE</a>
-    <a class= "btn btn-primary btn-sm w-5 lead" href="{% url 'Accept-Create' %}" role="button">ACCEPT THE TERMS</a>
+    <a class="btn btn-danger" href="{% url 'LikHanap-Bids' %}">DECLINE</a>
+    <a class= "btn btn-info" href="{% url 'contractcategory' %}" role="button">ACCEPT THE TERMS</a>
   </div>
 
   {% endif %}

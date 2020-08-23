@@ -43,56 +43,85 @@
           
           {% if user.is_authenticated and user.usertype == 'freelance'  %}
           <a class="active" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-Business' %}">Projects</a>
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Proposals</a>
-                                <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+          <a class="nav-item nav-link" href="{% url 'findproject' %}">Find Projects</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Invites</a>
                                 <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+                             
                                   
                                   
                                       </div>
                                 {% elif user.is_authenticated and user.usertype == 'business'  %}
           <!--<a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>-->
-          <a class="active" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
-          <a class="nav-item nav-link" href="{% url 'LikHanap-Freelance' %}">Freelancers</a>
+          <a class="nav-item nav-link" href="{% url 'LikhanapFeedback' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'findartists' %}">Artists</a>
           <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
           <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
-          <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Project Status</a>
           <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
-          <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+         
                  
            
              
               </div>
           {% else %}
           {% endif %}
-        <!-- Navbar Right Side -->
+          {% if user.is_authenticated and user.usertype == 'freelance'  %}
+          <!-- Navbar Right Side -->
 
-        <div class="navbar-nav">
-          {%  if user.is_authenticated  %}
-          <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
-          <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
-          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-          {%  else  %}
-          <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-          <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
-          {%  endif  %}
+          <div class="navbar-nav">
+            {%  if user.is_authenticated  %}
+            <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+            <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+            <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {%  else  %}
+            <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            {%  endif  %}
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-</header>
-<main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {%  if messages  %}
-              {%  for message in messages  %}
-                  <div class="alert alert-{{ message.tags }}">
-                       {{ message }}
-                      </div>
-              {%  endfor  %}
-          {%  endif  %}
-         
+    </nav>
+  </header>
+  <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {%  if messages  %}
+                {%  for message in messages  %}
+                    <div class="alert alert-{{ message.tags }}">
+                         {{ message }}
+                        </div>
+                {%  endfor  %}
+            {%  endif  %}
+            {% elif user.is_authenticated and user.usertype == 'business'  %}
+            <!-- Navbar Right Side -->
+
+          <div class="navbar-nav">
+            {%  if user.is_authenticated  %}
+            <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+            <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+            <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {%  else  %}
+            <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            {%  endif  %}
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {%  if messages  %}
+                {%  for message in messages  %}
+                    <div class="alert alert-{{ message.tags }}">
+                         {{ message }}
+                        </div>
+                {%  endfor  %}
+            {%  endif  %}
+         {%  endif  %} 
         </div>
 </main>
 </body>
@@ -122,65 +151,180 @@
             </div>
 </div>
 <span class="text-center d-inline-block">
-  <a class="btn btn-primary btn-lg w-80 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>
+  {% if user.is_authenticated and user.verified == 'False' %}
+  <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'prescreen' %}" role="button">Post an application</a>
+  {% elif user.is_authenticated and user.verified == 'True' %}
+  <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>
+  {% endif %}
   <p class=" lead text-black">Create now!</p>
 </span>
 </br>
 </br>
 </br>
 </br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-    <img img src="{%static 'Home_Business/Competitive_Advantage.png'%}" alt="Image" height="645" width="1100" class="center" type="image"> </img>
+
+<b>LIKHANAP FEEDBACKS</b><img img src="{%static 'Home_Business/feedback.png'%}" alt="Image" height="100" width="100" class="center" type="image"> </img>
+{% for post in likhanapfeedbacks %}  
+            
+            <article class="media content-section" >
+              <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+                    <div class="media-body">
+                      <div class="article-metadata">
+                        <small class="text-muted">{{ post.dateposted }} </small>
+                      </div>
+                      <p class="article-Feedback">{{ post.Feedback }}</p>
+                    </div>
+                  </article>
+                  {% endfor %}
 </br>
 </br>
     {% elif user.is_authenticated and user.usertype == 'business' %}
 <div class="jumbotron jumbotron-fluid  ">
   <div class="container text-center text-lg-left">
-          <div class="container col-lg-15 text-white">
-</br>
-</br>
-</br>
-</br> 
-</br>
-</br>
-</br>
-</br> 
-</br>
-</br>
-</br>
-</br> 
-</br>
-</br> 
-</br>
-</br>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <table class="center" style= "color: rgb(124, 124, 124)">
+      <tr>
+        <th>Choose a plan</th>
+        <th>
+      <div class="flip-box">
+        <div class="flip-box-inner">
+          <div class="flip-box-front">
+            <img src="{%static 'Home_Business/free.png'%}" height="200" width="200" class="center">
+          </div>
+          <div class="flip-box-back">
+            <a class="navbar-brand mr-4" href="{% url 'findartists' %}"></br></br></br>Free Trial</a>
+          </div>
+        </div>
       </div>
-          <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
-              <source src="{%static 'Home_Business/intro.mp4'%}" type="video/mp4" />
-            </video>   
-                </div>
-</div>
-<span class="text-center d-inline-block">
-  {% if user.is_authenticated and user.verified == 'False' %}
-          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Post-Create' %}" role="button">Post a project commission</a>
-          {% elif user.is_authenticated and user.verified == 'True' %}
-          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'VerifiedPost-Create' %}" role="button">Post a project commission</a>
+        </th>
+        <th>
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front">
+              <img src="{%static 'Home_Business/Pro.png'%}" height="200" width="200" class="center">
+            </div>
+            <div class="flip-box-back">
+              {% if user.paid == 'Paid' %}
+              <a class="navbar-brand mr-4" href="{% url 'findartists' %}"></br></br></br>Upgrade to Pro</a>
+              {% elif user.paid == 'Unpaid' %}
+              <a class="navbar-brand mr-4" href="{% url 'subscribe' %}"></br></br></br>Upgrade to Pro</a>
           {% endif %}
-  <p class=" lead text-black">Create now!</p>
-</span>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-  <img img src="{%static 'Home_Business/Competitive_Advantage.png'%}" alt="Image" height="645" width="1100" class="center" type="image"> </img>
+            </div>
+          </div>
+        </div>
+      </th>
+      <tr>
+        <td>See Artist's Ratings</td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Reviews</td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Location</td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Sample projects</td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Pre-screening Results</td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+    </table>
+    </br>
+    </br>
+    <a class="btn btn-outline-primary" href="http://www.paypal.com" role="button">Pay us through PayPal &raquo;</a>
+    </br>
+   
+    <style>
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+    
+    /* Style table headers and table data */
+    th, td {
+      text-align: center;
+      padding: 16px;
+    }
+    
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+    
+    /* Zebra-striped table rows */
+    tr:nth-child(even) {
+      background-color: #f2f2f2
+    }
+    
+    .fa-check {
+      color: green;
+    }
+    
+    .fa-remove {
+      color: red;
+    }
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      .flip-box {
+        background-color: transparent;
+        width: 200px;
+        height: 200px;
+        border: transparent;
+        perspective: 1000px;
+      }
+      
+      .flip-box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+      
+      .flip-box:hover .flip-box-inner {
+        transform: rotateY(180deg);
+      }
+      
+      .flip-box-front, .flip-box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+      
+      .flip-box-front {
+        background-color: transparent;
+        color: black;
+      }
+      
+      .flip-box-back {
+        background-color:transparent;
+        color: white;
+        transform: rotateY(180deg);
+      }
+    </style>
+
+<span class="text-center d-inline-block">
+ </span>
+</div>
+</div>
 </br>
 </br>
 {% endif %}

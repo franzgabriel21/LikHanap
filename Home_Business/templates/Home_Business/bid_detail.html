@@ -1,7 +1,7 @@
 {%  extends "Home_Business/base.html"  %}
 {%   load static   %}
 {%  block content   %} 
-            
+{% if object.status == '---' %}
      <article class="media content-section">
           <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
               <div class="media-body">
@@ -19,10 +19,13 @@
                </br>
                <h5><b>Project Details:</b></h5>{{ object.content }}</p>
              </br>
-                <img class="img-responsive"  width="304" height="236"  src="{{ object.image.url }}">
+             <h5><b>Attached Image:</b></h5>
+                <img class="img-responsive"  width="500" height="350"  src="{{ object.image.url }}">
                 <p></p>
               </br>
               <h5><b>Category:</b></h5>{{ object.category }}</p>
+            </br>
+            <h5><b>Theme:</b></h5>{{ object.theme }}</p>
             </br>
             <h5><b>Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
                            
@@ -331,12 +334,245 @@
             </br>
             </br>
             {% endif %}
-                        </br>
-            <a class="btn btn-outline-secondary" href="{% url 'LikHanap-HomeStatus' %}" role="button">GO BACK TO HOMEPAGE</a>
+          
+            <a class="btn btn-outline-secondary" href="{% url 'LikhanapFeedback' %}" role="button">GO BACK TO HOMEPAGE</a>
                 </br>
               </br>
              </div>
       </article>
-           
+      {% endif %}
+      {% if object.status == 'Cancelled' %}
+      <div class="article-metadata">
+        <head>
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #b8b8b8;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+</head>
+  <body>
+    
+    <h3>{{ object.title }}</h3>
+  
+  <table>
+    <tr>
+      <td style="text-align:center"><b>Project Partner</b></th>
+      <td style="text-align:center"><b>Date Posted</b></th>
+      <td style="text-align:center"><b>Settled Rate</b></th>
+      <td style="text-align:center"><b>Category</b></th>
+      <td style="text-align:center"><b>Project Status</b></th>
+    </tr>
+    <tr>
+      <td style="text-align:center">{{ object.artist_username }}</td>
+      <td style="text-align:center">{{ object.dateposted }}</td>
+      <td style="text-align:center">{{ object.rate}}</td>
+      <td style="text-align:center">{{ object.category }}</td>
+      <td style="text-align:center"><b><p style="color:rgba(197, 20, 20, 0.856)">{{ object.status }}</p></b></td>
+    </tr>
+    </table>
+</br>
+</br>
+<a href="{% url 'Report-Create' %}" >
+  <button class="btn btn-danger"> Report {{ object.artist_username }}!</button>
+ </a>
+</br>
+</br>
+            <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Bids' %}" role="button">Back &laquo;</a>
+          </br>
+        </br>
+          </div> 
+        </article>  
+      </body>
+      </html>
+        {% endif %}
+        {% if object.status == 'Ongoing' %}
+        <div class="article-metadata">
+          <head>
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #b8b8b8;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    div {
+              margin-bottom: 10px;
+              padding: 4px 10px;
+            }
+              .warning {
+              background-color:  #f5e39ddc;
+              border-left: 6px solid #FFCC00;
+            }
+    </style>
+  </head>
+  <body>
+      
+      <h3>{{ object.title }}</h3>
+    
+    <table>
+      <tr>
+        <td style="text-align:center"><b>Project Partner</b></th>
+        <td style="text-align:center"><b>Date Posted</b></th>
+        <td style="text-align:center"><b>Settled Rate</b></th>
+        <td style="text-align:center"><b>Category</b></th>
+        <td style="text-align:center"><b>Project Status</b></th>
+      </tr>
+      <tr>
+        <td style="text-align:center">{{ object.artist_username }}</td>
+        <td style="text-align:center">{{ object.dateposted }}</td>
+        <td style="text-align:center">{{ object.rate}}</td>
+        <td style="text-align:center">{{ object.category }}</td>
+        <td style="text-align:center"><b><p style="color:rgba(7, 141, 41, 0.856)">{{ object.status }}</p></b></td>
+      </tr>
+    </table>
+  </br>
+</br>
+</br>
+  <div class="row" style= "margin:-20px 0px 0px 10px;"> 
+  <div class="col-6">
+    <h4>Contract Agreement:</h4>
+    
+      <a href= "{{ object.contract.url }}" download> 
+        <img src="{{ object.contract.url }}" alt="contract" width="250" height="350">
+      </br>
+    </br>
+        <p><b>Download Contract</b></p>
+      </a>
+    </div>
+    </div> 
+  </div> 
+     {% endif %}
+      {% if object.status == 'Completed' %}
+      
+      <div class="article-metadata">
+        <head>
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #b8b8b8;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  div {
+  margin-bottom: 10px;
+  padding: 4px 10px;
+}
+  .success {
+  background-color: #ddffdd;
+  border-left: 6px solid #4CAF50;
+}
+
+  </style>
+  </head>
+  <body>
+
+    
+    <h3>{{ object.title }}</h3>
+  
+  <table>
+    <tr>
+      <td style="text-align:center"><b>Project Partner</b></th>
+      <td style="text-align:center"><b>Date Posted</b></th>
+      <td style="text-align:center"><b>Settled Rate</b></th>
+      <td style="text-align:center"><b>Category</b></th>
+      <td style="text-align:center"><b>Project Status</b></th>
+    </tr>
+    <tr>
+      <td style="text-align:center">{{ object.artist_username }}</td>
+      <td style="text-align:center">{{ object.dateposted }}</td>
+      <td style="text-align:center">{{ object.rate}}</td>
+      <td style="text-align:center">{{ object.category }}</td>
+      <td style="text-align:center"><b><p style="color:rgba(28, 11, 180, 0.856)">{{ object.status }}</p></b></td>
+    </tr>
+    </table>
+  </br>
+</br>
+</br>
+  <div class="row" style= "margin:-20px 0px 0px 10px;"> 
+  <div class="col-6">
+    <h4>Contract Agreement:</h4>
+    
+      <a href= "{{ object.contract.url }}" download> 
+        <img src="{{ object.contract.url }}" alt="contract" width="250" height="350">
+      </br>
+    </br>
+        <p><b>Download Contract</b></p>
+      </a>
+    </div>
+    
+      {% if object.category == "WEB DESIGNS" %}
+      <div class="col-6">
+      <h4>Ownership Certificate:</h4>
+      <a href= "{{ object.certificate.url }}" download> 
+          <img src="{{ object.certificate.url }}" alt="certificate" width="300" height="200">
+        </br>
+      </br>
+          <p><b>Download Certificate</b></p>
+        </a>
+     </div>
+     {% elif object.category == "LOGO" %}
+     <div class="col-5">
+      <div class="success">
+        <strong> Unlock your Certificate!</strong><p> Rate your Artist!</p>
+      </div> 
+      <h4>Ownership Certificate:</h4>
+      <a href= "{{ object.certificate.url }}" download> 
+          <img src="{{ object.certificate.url }}" alt="certificate" width="300" height="200">
+        </br>
+      </br>
+          <p><b>Download Certificate</b></p>
+        </a>
+       
+          <a href="{% url 'Feedback-Create' %}" >
+           <button class="btn btn-outline-secondary"> Give {{ object.artist_username }} a Rating <img src="{%static 'Home_Business/ratings.png'%}" height="50" width="50" class="center"></button>
+            
+            
+          </a>
+     </div>
+    
+     {% endif %}
+    </div>
+  </body>
+</br>
+<a class="btn btn-outline-secondary" href="{% url 'LikHanap-Bids' %}" role="button">Back &laquo;</a>
+</br>
+</br>
+
+</div> 
+   </article>  
+</body>
+</html>
+   {% endif %}
 {%  endblock content   %} 
    

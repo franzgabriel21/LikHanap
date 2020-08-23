@@ -1,0 +1,106 @@
+
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+{%   load static   %}
+      
+<!DOCTYPE html>
+<html>
+  
+
+        <head>
+                        <!-- Required meta tags -->
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+                    
+                        <!-- Bootstrap CSS -->
+                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+                        <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+                        
+                       
+                {% if title %}
+                <title> LikHanap - {{title}}</title>
+                {% else %}
+                <title>LikHanap </title>
+                {% endif %}
+        </head>
+        <body>
+          <body style="background-color:#FFF8DC"></body>
+             <header class="site-header">
+              <div class="right">
+                        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top"> 
+                          <div class="container">
+                              {% if user.is_authenticated  %}
+                                <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}"> 
+                              {% else %}3
+                                <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+                              {% endif %} 
+                              <span class='span-logo'> 
+                                <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+                            </span></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarToggle">
+                              <div class="navbar-nav mr-auto">
+                             
+                                
+
+          <a class="nav-item nav-link" href="{% url 'categories' %}">Categories</a>
+          <a class="nav-item nav-link" href="{% url 'howitworks' %}">How it Works</a>
+          <a class="nav-item nav-link" href="{% url 'FAQ' %}">FAQ's</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+
+             </div>
+            </div>                      
+
+      </nav>
+    </header>
+        
+  </br>
+  <h2><strong>FAQS</strong></h2>
+  </br>
+</br>
+<p><b>How can I join LikHanap?</b></p>
+
+<p>Just simply register as a freelancer or 
+as a sole proprietor. Follow all the instructions and fill out all the necessary information. Here in Likhanap, artists
+would undergo a pre-screening test to make sure that the qualifications are met
+before we pass them to the clients. Once its done, wait for the approval/rejection email.
+   </p>
+  </br>
+  <p><b>How to use LikHanap once I register as a freelancer?</b></p>
+  <p>Clients will post a commission project and the artists will apply for it and be evaluated based on their location, 
+estimated price range, reviews, sample projects and our LikHanap pre-screening results.</p>
+</br>
+<p><b>How to use LikHanap once I register as a business owner?</b></p>
+<p>Once Registered, the user will be able to choose from various freelancers who underwent pre-screening tests to make 
+  sure that they are qualified. The chosen freelancer would coordinate with the user so that they can come to an agreement 
+  for the commission. The user would have to pay a certain amount in order to post commissions that can be viewed by freelancers.</p>
+</br>
+<p><b>How does LikHanap bidding work?</b></p>
+<p>As an artist, you will offer a price for your propose service to the client. While the other freelancers will
+  also make a bid to the project and their bid maybe higher or lower than yours.</p>
+</br>
+<p><b>How can I find quality artists on LikHanap?</p></b>
+<p>Simply make sure to look at the required skills and qualifications of the artists. Choose the best artist based on their profile details, reviews, portfolios, and past work experiences.</p>
+</br>
+<p><b>How will I communicate with my chosen freelancer to do my posted project?</b></p>
+<p>It's up to you and the artist on how you will transact and communicate through the phone, skype, viber, email, or even messenger.</p>      
+</br>
+<p><b>How can you ensure that the line of artists in LikHanap is real and a legit artist?</b></p>
+<p>LikHanap has a pre-screening test to ensure that artists will surely meet the basic requirements for the project that the clients will offer.</p>      
+</br>
+<p><b>How does the payment transaction work?</b></p>
+<p>LikHanap offers two subscription package upon the usage of our website. The first package is a free trial that will last up to 3 project postings. The second one is our pro package that can last up to 100 project postings.</p>      
+</br>
+ <p><b>How can I make sure that a post of a business owner is legit and not a scam?</b></p>
+ <p>Here in LikHanap, we make sure that every business owners who registered is legit by looking into their business registration details, we will make sure that they are really posting a project by making them pay for every commission they post.</p> 
+  </br>
+  
+</br>
+    
+   </html>
+{%  endblock content   %} 
+   

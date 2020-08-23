@@ -1,28 +1,79 @@
 {%  extends "Home_Business/base.html"  %}
 {%  block content   %} 
 {%   load static   %}
-            
-     <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
+<style>
+  .all-browsers {
+    margin: 0;
+    padding: 5px;
+    background-color: #FEF9E7 ;
+  }
+  
+  .all-browsers > h1, .browser {
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  .browser {
+    background: #FEF9E7 ;
+  }
+  
+  .browser > h2, p {
+    margin: 4px;
+    font-size: 90%;
+  }
+
+      h2 {
+      margin:0px 100px 0px 100px;
+        text-align: center;
+        letter-spacing: 2px;
+      }
+  </style>
+
+  {% if user.is_authenticated and user.usertype == 'freelance' %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
+        <div class="media-body">
+          <div class="article-metadata">
+           <a class="mr-2" >{{ object.author }}</a>
+           <small class="text-muted">{{ object.dateposted }}</small>
+           {% if object.author == user %}
+           <div>
+            <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Portfolio-Update' object.id  %}">Update</a>
+            <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Portfolio-Delete' object.id  %}">Delete</a>
+           </div>
+           {% endif %}
+         </div>
+            {% elif user.is_authenticated and user.usertype == 'business' %}
+     <article class="all-browsers">
+          
               <div class="media-body">
                 <div class="article-metadata">
-                 <a class="mr-2" >{{ object.author }}</a>
-                 <small class="text-muted">{{ object.dateposted }}</small>
-                 {% if object.author == user %}
+                </br>
+                  <img class="rounded-circle " src="{{  object.author.profile.image.url  }}" height="300" width="300" class="center">
+                </br>
+                  <img src="{{ object.overallrating.url }}"height="60" width="150" class="center">
+                </br>
+                  {% if object.author == user %}
                  <div>
                   <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{%  url 'Portfolio-Update' object.id  %}">Update</a>
                   <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{%  url 'Portfolio-Delete' object.id  %}">Delete</a>
                  </div>
                  {% endif %}
                </div>
+               {% endif %}
                {% if user.is_authenticated and user.usertype == 'freelance' %}
-               <h2 class="article-Expertise">{{ object.Expertise }}</h2>
               </br>
-              <h5><b>Background:</b></h5>{{ object.Background }}</p>
+               <h3 class="article-Expertise">{{ object.Expertise }}</h3>
+              </br>
+              <h5><b> Background:</b></h5>{{ object.Background }}</p>
             </br>
-              <h5><b>Category:</b></h5>{{ object.category }}</p>
+              <h5><b> Category:</b></h5>{{ object.category }}</p>
             </br>
-              <h5><b>Location:</b></h5>{{ object.location }}</p> 
+            <h5><b> Theme:</b></h5>{{ object.theme }}</p>
+          </br>
+          <h5><b> Rate of Pay:</b></h5>{{ object.rate }}</p>
+            </br>
+              <h5><b> Location:</b></h5>{{ clocation }}</p> 
             </br>
             <h5><b>Sample Projects:</b></h5> 
 <div class="row" style= "overflow: auto;" >
@@ -54,6 +105,7 @@
                       margin-right: auto;
                       }
                       </style>
+                       
                     <a class="navbar-brand mr-4" href="#section2"> 
                     <span class='span-logo'> 
                       <img src="{{ object.image2.url }}" height="136" width="204" class="center">
@@ -81,14 +133,21 @@
                </div>
                  {% endif %}
                {% if user.is_authenticated and user.usertype == 'business' %} 
+               <h2><a class="btn btn-info btn-medium w-20 lead" href="{% url 'Bid-Create' %}" role="button">Invite {{ object.author }} for a project!</a></h2>
+              </br> 
                <h2 class="article-Expertise">{{ object.Expertise }}</h2>
               </br>
+            </br>
                 <h5><b>Background:</b></h5>{{ object.Background }}</p>
               </br>
-                <h5><b>Category:</b></h5>{{ object.category }}</p>
+                <h5><b>Expertise:</b></h5>{{ object.category }}</p>
               </br>
-                <h5><b>Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
-              
+              <h5><b>My Art Style:</b></h5>{{ object.theme }}</p>
+            </br>
+            <h5><b> Rate of Pay:</b></h5>{{ object.rate }}</p>
+              </br>
+                <h5><b>My Current Location:</b></h5> {{ object.city }}, {{ object.street }}</p> 
+              </br>
 {% if object.street == 'Anilao' %}
 <img src="{%static 'Home_Business/Malolos City Barangays/Anilao.jpg'%}" height="300" width="530" class="center">
 </br>
@@ -448,14 +507,50 @@
                   </div>
                  </div>
                 </br>
-                 <a class="btn btn-primary btn-medium w-20 lead" href="{% url 'Bid-Create' %}" role="button">OFFER</a>    <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Freelance' %}" role="button">GO BACK</a>
+
+                      <h5><b>Ratings from other Business Owners:</b></h5>
+                      <article class="media content-section" >
+                        <img class="rounded-circle article-img" src="{{ object.b1image.url }}">
+                              <div class="media-body">
+                                <div class="article-metadata">
+          
+                                  <div>  <small class="text-muted">{{ object.b1 }} | {{ object.r1 }}</small></div>
+                                </div>
+                                <p class="article-f1">{{ object.f1 }}</p>
+                              </div>
+                                
+                             
+                            </article>
+                              <article class="media content-section" >
+                                <img class="rounded-circle article-img" src="{{ object.b2image.url }}">
+                                      <div class="media-body">
+                                        <div class="article-metadata">
+                  
+                                          <div>  <small class="text-muted">{{ object.b2 }} | {{ object.r2 }}</small></div>
+                                        </div>
+                                        <p class="article-f2">{{ object.f2 }}</p>
+                                      </div>
+                                     
+                                    </article>
+                                    <article class="media content-section" >
+                                      <img class="rounded-circle article-img" src="{{ object.b3image.url }}">
+                                            <div class="media-body">
+                                              <div class="article-metadata">
+                        
+                                              <div>  <small class="text-muted">{{ object.b3 }} | {{ object.r3 }}</small></div>
+                                              </div>
+                                              <p class="article-f3">{{ object.f3 }}</p>
+                                            </div>
+                                           
+                                          </article> 
+                                
+                              
+                     <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Freelance' %}" role="button">GO BACK</a>
      </br>
     </br>
                  {% endif %}
              </div>
       </article>
-           
-      <a style="font-size:24px" href="{% url 'Feedback-Create' %}" role="button">Give a feedback <i class="material-icons">&#xe87f;</i></a>
     </br>
   </br>
 </br>
@@ -514,7 +609,15 @@
     </br>
     </br>
     </br>
-
+  </br>
+  <h5><b>Likhanap Pre-screening Results:</b></h5> 
+</br>
+  <a href= "{{ object.prescreen.url }}" download> 
+  <img src="{{ object.prescreen.url }}" height="350" width="250" class="center">
+</br>
+</br>
+    <p><b>Download Prescreening Results</b></p>
+  </a>
   </div>
 
 {%  endblock content   %} 

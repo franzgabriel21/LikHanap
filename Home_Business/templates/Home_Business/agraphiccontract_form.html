@@ -1,0 +1,162 @@
+{%  extends "Home_Business/base.html"  %}
+{% load crispy_forms_tags %}
+{%   load static   %}
+{%  block content   %} 
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+  <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+  
+ 
+{% if title %}
+<title> LikHanap - {{title}}</title>
+{% else %}
+<title>LikHanap </title>
+{% endif %}
+</head>
+<body>
+<header class="site-header">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      
+    <div class="container">
+        {% if user.is_authenticated  %}
+          <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}"> 
+        {% else %}3
+          <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+        {% endif %} 
+        <span class='span-logo'> 
+          <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+      </span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          
+          {% if user.is_authenticated and user.usertype == 'freelance'  %}
+          <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
+          <a class="active" href="{% url 'findproject' %}">Find Projects</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Invites</a>
+          <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+
+</div>
+                   {% else %}
+           {% endif %}
+           {% if user.is_authenticated and user.usertype == 'freelance'  %}
+           <!-- Navbar Right Side -->
+
+         <div class="navbar-nav">
+           {%  if user.is_authenticated  %}
+           <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+           <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+           <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+           <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+           {%  else  %}
+           <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+           <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+           {%  endif  %}
+         </div>
+       </div>
+     </div>
+   </nav>
+ </header>
+ <main role="main" class="container">
+       <div class="row">
+         <div class="col-md-8">
+           {%  if messages  %}
+               {%  for message in messages  %}
+                   <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                       </div>
+               {%  endfor  %}
+           {%  endif  %}
+        {%  endif  %}
+</div>
+</div>
+</main>
+</body>
+</head>
+{% if user.is_authenticated and user.usertype == 'freelance'  %}
+<article class="media content-section">
+<div class="media-body">
+</br>
+  <h6>Congratulations on your new Likhanap Project!</h6>
+</br>
+  <h6>To cover the arrangements and agreed-upon terms made between you and your artist, Likhanap will provide a contract agreement to protect both parties.</h6>
+</br>
+  <b>For Graphic Design Contract Agreement:</b>
+</br>
+</br>
+  <p>We ask that you agree to the contract before you start on your graphic design project.</p>  
+</br>
+<b>What I, as the LikHanap artist, agrees to….</b>
+  </br> 
+  </br>
+  <p>Create graphics primarily for published, printed, or electronic media, such as brochures, logos, advertising and web design</p>  
+  </br> 
+  <b>Details...</b>
+  </br> 
+  </br>
+  <b>Services to be Performed: </b>
+  </br> 
+  </br>
+  <p>Artist shall perform the described services for the Business Owner within their agreed details. </p>
+  </br>
+  <b>Completion Date: </b>
+  </br> 
+  </br>
+  <p>The services of the Artist on the desired project are to be completed on or before the day of the Business Owner’s desired date.</p>
+  </br>
+  <b>Payment Notes: </b>
+  </br> 
+  </br>
+  <p>Should the client change the scope of the project, the Artist reserves the right to contact the client for further change on their deal accordingly. The grant of any license or right of copyright is conditioned on receipt of full payment. </p>
+  </br>
+  <b>Billable Time: </b>
+  </br> 
+  </br>
+  <p>Payment for all time spent performing the scope of work and communicating with the client is needed to be inclusive within their deal.</p>
+  </br>
+</div>
+</article>              
+</br>
+
+    
+            {% if is_paginated %}
+      
+            {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% endif %}
+            {% endfor %}
+
+          {% endif %}
+          {% endif %}
+          
+          <div class="content-section">
+            <form method="POST" enctype="multipart/form-data">
+                {%  csrf_token    %}                
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Fill out all the information needed</legend>
+                    {{   form|crispy   }}
+    
+                </fieldset>
+                <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Submit</button>
+                </div>
+            </form>
+                
+    </div>
+    
+    {%  endblock content   %} 
+   

@@ -1,0 +1,304 @@
+
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+{%   load static   %}
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'Home_Business/main.css' %}">
+  <link rel="stylesheet" type="text/css"  href="{% static 'Home_Business/style.css' %}">
+  
+ 
+{% if title %}
+<title> LikHanap - {{title}}</title>
+{% else %}
+<title>LikHanap </title>
+{% endif %}
+</head>
+<body>
+<header class="site-header">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      
+    <div class="container">
+        {% if user.is_authenticated  %}
+          <a class="navbar-brand mr-4" href="{% url 'LikHanap-Business' %}"> 
+        {% else %}3
+          <a class="navbar-brand mr-4" href="{% url 'prehome' %}">
+        {% endif %} 
+        <span class='span-logo'> 
+          <img src="/media/LikHanap Logo.png" height="50" width="200" class="center">
+      </span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          
+          {% if user.is_authenticated and user.usertype == 'freelance'  %}
+          <a class="active" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'findproject' %}">Find Projects</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Invites</a>
+                                <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+                             
+                                  
+                                  
+                                      </div>
+                                {% elif user.is_authenticated and user.usertype == 'business'  %}
+          <!--<a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>-->
+          <a class="nav-item nav-link" href="{% url 'LikhanapFeedback' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'findartists' %}">Artists</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
+          <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Project Status</a>
+          <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+         
+                 
+           
+             
+              </div>
+          {% else %}
+          {% endif %}
+          {% if user.is_authenticated and user.usertype == 'freelance'  %}
+          <!-- Navbar Right Side -->
+
+          <div class="navbar-nav">
+            {%  if user.is_authenticated  %}
+            <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+            <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+            <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {%  else  %}
+            <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            {%  endif  %}
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {%  if messages  %}
+                {%  for message in messages  %}
+                    <div class="alert alert-{{ message.tags }}">
+                         {{ message }}
+                        </div>
+                {%  endfor  %}
+            {%  endif  %}
+            {% elif user.is_authenticated and user.usertype == 'business'  %}
+            <!-- Navbar Right Side -->
+
+          <div class="navbar-nav">
+            {%  if user.is_authenticated  %}
+            <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+            <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+            <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {%  else  %}
+            <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            {%  endif  %}
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {%  if messages  %}
+                {%  for message in messages  %}
+                    <div class="alert alert-{{ message.tags }}">
+                         {{ message }}
+                        </div>
+                {%  endfor  %}
+            {%  endif  %}
+         {%  endif  %}         
+        </div>
+</main>
+</body>
+</head>
+{% if user.is_authenticated and user.usertype == 'freelance' %}
+<div class="jumbotron jumbotron-fluid  ">
+  <div class="container text-center text-lg-left">
+          <div class="container col-lg-15 text-white">
+</br>
+</br>
+</br>
+</br> 
+</br>
+</br>
+</br>
+</br> 
+</br>
+</br>
+</br>
+</br> 
+</br>
+</br> 
+  </div>
+      <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
+          <source src="{%static 'Home_Business/intro.mp4'%}" type="video/mp4" />
+        </video>   
+            </div>
+</div>
+<span class="text-center d-inline-block">
+  {% if user.is_authenticated and user.verified == 'False' %}
+  <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'prescreen' %}" role="button">Post an application</a>
+  {% elif user.is_authenticated and user.verified == 'True' %}
+  <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>
+  {% endif %}
+  <p class=" lead text-black">Create now!</p>
+</span>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+    <img img src="{%static 'Home_Business/Competitive_Advantage.png'%}" alt="Image" height="645" width="1100" class="center" type="image"> </img>
+</br>
+</br>
+    {% elif user.is_authenticated and user.usertype == 'business' %}
+<div class="jumbotron jumbotron-fluid  ">
+  <div class="container text-center text-lg-left">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <table class="center" style= "color: rgb(124, 124, 124)">
+      <tr>
+        <th>Upgrade now!</th>
+        <th>
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front">
+              <img src="{%static 'Home_Business/Pro.png'%}" height="200" width="200" class="center">
+            </div>
+            <div class="flip-box-back">
+              <a class="navbar-brand mr-4" href="{% url 'findartists' %}"></br></br></br>Upgrade to Pro</a>
+            </div>
+          </div>
+        </div>
+      </th>
+      <tr>
+        <td>See Artist's Ratings</td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Reviews</td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Location</td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Sample projects</td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>See Artist's Pre-screening Results</td>
+        <td><i class="fa fa-check"></i></td>
+      </tr>
+    </table>
+    </br>
+    </br>
+    <a class="btn btn-outline-primary" href="http://www.paypal.com" role="button">Pay us through PayPal &raquo;</a>
+    </br>
+   
+    <style>
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+    
+    /* Style table headers and table data */
+    th, td {
+      text-align: center;
+      padding: 16px;
+    }
+    
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+    
+    /* Zebra-striped table rows */
+    tr:nth-child(even) {
+      background-color: #f2f2f2
+    }
+    
+    .fa-check {
+      color: green;
+    }
+    
+    .fa-remove {
+      color: red;
+    }
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      .flip-box {
+        background-color: transparent;
+        width: 200px;
+        height: 200px;
+        border: transparent;
+        perspective: 1000px;
+      }
+      
+      .flip-box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+      
+      .flip-box:hover .flip-box-inner {
+        transform: rotateY(180deg);
+      }
+      
+      .flip-box-front, .flip-box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+      
+      .flip-box-front {
+        background-color: transparent;
+        color: black;
+      }
+      
+      .flip-box-back {
+        background-color:transparent;
+        color: white;
+        transform: rotateY(180deg);
+      }
+    </style>
+
+<span class="text-center d-inline-block">
+ </span>
+</div>
+</div>
+</br>
+</br>
+{% endif %}
+{%  endblock content   %} 
+   

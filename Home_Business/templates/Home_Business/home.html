@@ -23,6 +23,7 @@
                 {% endif %}
         </head>
         <body>
+          <body style="background-color:#FFF8DC"></body>
              <header class="site-header">
                 
                         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -43,12 +44,11 @@
                               <div class="navbar-nav mr-auto">
                                 
                                 {% if user.is_authenticated and user.usertype == 'freelance'  %}
-                               <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
-          <a class="active" href="{% url 'LikHanap-Business' %}">Projects</a>
-          <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Proposals</a>
-          <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
-          <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
-          <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+                               <a class="nav-item nav-link" href="{% url 'LikhanapFeedback' %}">Home</a>
+                               <a class="active" href="{% url 'findproject' %}">Find Projects</a>
+                               <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Invites</a>
+                               <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+         
             
             <form >
                 <div class="searchBox">
@@ -62,13 +62,13 @@
               </form>
                 </div>
                                 {% elif user.is_authenticated and user.usertype == 'business'  %}
-                                <a class="nav-item nav-link" href="{% url 'LikHanap-HomeStatus' %}">Home</a>
-         <a class="active" href="{% url 'LikHanap-Freelance' %}">Freelancers</a>
-         <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
-         <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
-         <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
-         <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
-         <a class="nav-item nav-link" href="{% url 'LikHanap-About' %}">About</a>
+                                <a class="nav-item nav-link" href="{% url 'LikhanapFeedback' %}">Home</a>
+                                <a class="nav-item nav-link" href="{% url 'findartists' %}">Artists</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Projects' %}">Projects</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Apply' %}">Applicants</a>
+                                <a class="nav-item nav-link" href="{% url 'LikHanap-Bids' %}">Project Status</a>
+                                <a class="nav-item nav-link" href="{% url 'Help-Center' %}">Help Center</a>
+                               
                 
            <form >
              <div class="searchBox">
@@ -84,12 +84,14 @@
              </div>
                                         {% else %}
                                 {% endif %}
+                                {% if user.is_authenticated and user.usertype == 'freelance'  %}
                               <!-- Navbar Right Side -->
 
                               <div class="navbar-nav">
                                 {%  if user.is_authenticated  %}
                                 <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
                                 <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+                                <a class="nav-item nav-link" href="{% url 'Employ' %}">Inbox</a>
                                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                                 {%  else  %}
                                 <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
@@ -110,21 +112,53 @@
                                             </div>
                                     {%  endfor  %}
                                 {%  endif  %}
-                                
+                                {% elif user.is_authenticated and user.usertype == 'business'  %}
+                                <!-- Navbar Right Side -->
+
+                              <div class="navbar-nav">
+                                {%  if user.is_authenticated  %}
+                                <a class="nav-item nav-link " href="{% url 'Profile-View' %}">Welcome! {{ user.name }}</a>
+                                <!--<a class="nav-item nav-link " href="{% url 'Post-Create' %}">New Project</a> -->
+                                <a class="nav-item nav-link" href="{% url 'Accept' %}">Inbox</a>
+                                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                                {%  else  %}
+                                <!--<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+                                {%  endif  %}
+                              </div>
+                            </div>
+                          </div>
+                        </nav>
+                      </header>
+                      <main role="main" class="container">
+                            <div class="row">
+                              <div class="col-md-8">
+                                {%  if messages  %}
+                                    {%  for message in messages  %}
+                                        <div class="alert alert-{{ message.tags }}">
+                                             {{ message }}
+                                            </div>
+                                    {%  endfor  %}
+                                {%  endif  %}
+                             {%  endif  %}
 {% if user.is_authenticated and user.usertype == 'freelance' %}
 <div class="jumbotron jumbotron-fluid  ">
     <div class="container text-center text-lg-left">
       
         <div class="container col-lg-15 text-white">
-            <h1 class="display-2 text-white">Connection with Sole Proprietors<span class="highlight-word"> made easier!</span></h1>
+            <h1 class="display-4 text-white">Connection with Sole Proprietors<span class="highlight-word"> made easier!</span></h1>
     <p class="lead">A platform for connecting freelance graphic artists and web designers to sole proprietors and linking local artists to local consumers.</p>
     <span class="text-center d-inline-block">
-      <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>
+      {% if user.is_authenticated and user.verified == 'False' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'prescreen' %}" role="button">Post an application</a>
+          {% elif user.is_authenticated and user.verified == 'True' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Portfolio-Create' %}" role="button">Post an application</a>
+          {% endif %}
     <p class=" lead text-white">Create now!</p>
     </span>          
         </div>
             <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
-                <source src="{%static 'Home_Business/jumbotron_clip.mp4'%}" type="video/mp4" />
+                <source src="{%static 'Home_Business/jumbotron_miniclip.mp4'%}" type="video/mp4" />
               </video>   
       </div>
   </div>
@@ -134,11 +168,10 @@
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="{% url 'Logo-Project' %}">Logo</a>
-      <a href="{% url 'Ad-Project' %}">Advertisement</a>
-      <a href="{% url 'Brandtag-Project' %}">Brand Taglines</a>
-      <a href="{% url 'Visual-Project' %}">Visual Arts</a>
-      <a href="{% url 'Interior-Project' %}">Interior Designs</a>
-      <a href="{% url 'LikHanap-Business2' %}">LikHanap Verified</a>
+      <a href="{% url 'Signage-Project' %}">Signage</a>
+      <a href="{% url 'Bannerads-Project' %}">Banner Ads</a>
+      <a href="{% url 'WebDesigns-Project' %}">Web Designs</a>
+     
 
     </div>
     
@@ -169,14 +202,25 @@
                     <div class="media-body">
                       <div class="article-metadata">
 
-                        <a class="mr-2" href="{%  url 'user-posts' post.author.username   %}">{{ post.author }}</a>
-                        <small class="text-muted">{{ post.dateposted }}</small>
+                        <a class="mr-2" href="{%  url 'user-posts' post.author.username   %}">{{ post.author }}'s Posts</a>
+                        <small class="text-muted">{{ post.dateposted }} </small>
                       </div>
                       <h2><a class="article-title" href="{% url 'Post-Detail' post.id %}">{{ post.title }}</a></h2>
                       <p class="article-content">{{ post.content }}</p>
                       <p class="article-category">{{ post.category }}</p>
                       <p class="article-location">{{ post.location }}</p>
-                      <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Apply-Create' %}" role="button">Apply</a>
+                      {% if user.is_authenticated and user.verified == 'False' %}
+          <a href="{% url 'prescreen' %}" >
+            <button class="btn btn-info">Apply</button> 
+              </a>
+              </br>  
+          {% elif user.is_authenticated and user.verified == 'True' %}
+          <a href="{% url 'Apply-Create' %}" >
+            <button class="btn btn-info">Apply</button> 
+          </a>
+              </a>
+              </br>  
+          {% endif %}
                     
                     
                     </div>
@@ -210,20 +254,26 @@
   <div class="container text-center text-lg-left">
     
       <div class="container col-lg-15 text-white">
-          <h1 class="display-2 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
+          <h1 class="display-4 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
   <p class="lead">A platform for connecting freelance graphic artists and web designers to sole proprietors and linking local artists to local consumers.</p>
         <span class="text-center d-inline-block">
-          {% if user.is_authenticated and user.verified == 'False' %}
+          {% if user.is_authenticated and user.verified == 'True' %}
+          {% if user.paid == 'Paid' %}
           <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Post-Create' %}" role="button">Post a project commission</a>
-          {% elif user.is_authenticated and user.verified == 'True' %}
-          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'VerifiedPost-Create' %}" role="button">Post a project commission</a>
+          {% elif user.paid == 'Unpaid' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'subscribe' %}" role="button">Post a project commission</a>
+          {% elif user.paid == 'Free' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'LikHanap-Freelance' %}" role="button">Search</a>
+          {% endif %}
+          {% elif user.is_authenticated and user.verified == 'False' %}
+          <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'subscribe2' %}" role="button">Post a project commission</a>          
           {% endif %}
 
         <p class=" lead text-white">Create now!</p>
         </span>
       </div>
           <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
-              <source src="{%static 'Home_Business/jumbotron_clip.mp4'%}" type="video/mp4" />
+              <source src="{%static 'Home_Business/jumbotron_miniclip.mp4'%}" type="video/mp4" />
             </video>   
     </div>
 </div>
@@ -235,10 +285,9 @@
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="{% url 'Logo-Artist' %}">Logo</a>
-    <a href="{% url 'Ad-Artist' %}">Advertisement</a>
-    <a href="{% url 'Brandtag-Artist' %}">Brand Taglines</a>
-    <a href="{% url 'Visual-Artist' %}">Visual Arts</a>
-    <a href="{% url 'Interior-Artist' %}">Interior Designs</a>
+    <a href="{% url 'Signage-Artist' %}">Signage</a>
+    <a href="{% url 'Bannerads-Artist' %}">Banner Ads</a>
+    <a href="{% url 'WebDesigns-Artist' %}">Web Designs</a>
   </div>
   
   <div id="main">
@@ -276,8 +325,32 @@
           <p class="article-Background">{{ post.Background}}</p>
           <p class="article-category">{{ post.category }}</p>
           <p class="article-location">{{ post.location }}</p>
-          <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Bid-Create' %}" role="button">Offer</a>
-       
+          {% if user.is_authenticated and user.verified == 'True' %}
+          {% if user.paid == 'Paid' %}
+          <a href="{% url 'Bid-Create' %}" >
+            <button class="btn btn-info">Invite</button> 
+              </a>
+              </br>   
+
+          {% elif user.paid == 'Unpaid' %}
+          <a href="{% url 'subscribe' %}" >
+            <button class="btn btn-info">Invite</button> 
+              </a>
+              </br>   
+          {% elif user.paid == 'Free' %}
+          <a href="{% url 'Bid-Create' %}" >
+            <button class="btn btn-info">Invite</button> 
+              </a>
+              </br>   
+          {% endif %}
+          {% elif user.is_authenticated and user.verified == 'False' %}          
+          <a href="{% url 'subscribe2' %}" >
+            <button class="btn btn-info">Invite</button> 
+              </a>
+              </br>  
+          {% endif %}
+
+         
                     
         </div>
       </article>
@@ -307,14 +380,15 @@
                               
                                     {% if user.is_authenticated and user.usertype == 'freelance' %}
                                     <div class="col-md-4">
-                                      <img img src="{%static 'Home_Business/User Guide - Local Artists.png'%}"  alt="Image" height="640" width="340"> </img>
+                                      <img src="{%static 'Home_Business/User Guide - Local Artists.png'%}"  alt="Image" height="940" width="340" style="opacity:0.5"> 
                                      </div>
 
                                     {% elif user.is_authenticated and user.usertype == 'business' %}
                                     <div class="col-md-4">
-                                      <img img src="{%static 'Home_Business/User Guide - Sole Proprietors.png'%}"  alt="Image" height="640" width="340"> </img>
+                                      <img src="{%static 'Home_Business/LFA/hans.png'%}"  alt="Image" height="620" width="380"> 
                                      </div>
                                     {% endif %}
+
                                   </p>
                                 </div>
                               </div>

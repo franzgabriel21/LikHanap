@@ -5,7 +5,7 @@
   <div class="container text-center text-lg-left">
     
       <div class="container col-lg-15 text-white">
-          <h1 class="display-2 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
+          <h1 class="display-4 text-white">Connection with Freelance Artists<span class="highlight-word"> made easier!</span></h1>
   <p class="lead">A platform for connecting freelance graphic artists and web designers to sole proprietors and linking local artists to local consumers.</p>
         <span class="text-center d-inline-block">
           <a class="btn btn-primary btn-lg w-100 lead" href="{% url 'Post-Create' %}" role="button">Post a project commission</a>
@@ -13,18 +13,16 @@
         </span>
       </div>
           <video  autoplay="true" loop="loop" preload="metadata" muted="muted" >
-              <source src="{%static 'Home_Business/jumbotron_clip.mp4'%}" type="video/mp4" />
+              <source src="{%static 'Home_Business/jumbotron_miniclip.mp4'%}" type="video/mp4" />
             </video>   
     </div>
 </div>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="{% url 'Logo-Project' %}">Logo</a>
-      <a href="{% url 'Ad-Project' %}">Advertisement</a>
-      <a href="{% url 'Brandtag-Project' %}">Brand Taglines</a>
-      <a href="{% url 'Visual-Project' %}">Visual Arts</a>
-      <a href="{% url 'Interior-Project' %}">Interior Designs</a>
-      <a href="{% url 'LikHanap-Business2' %}">LikHanap Verified</a>
+      <a href="{% url 'Logo-Artist' %}">Logo</a>
+      <a href="{% url 'Signage-Artist' %}">Signage</a>
+      <a href="{% url 'Bannerads-Artist' %}">Banner Ads</a>
+      <a href="{% url 'WebDesigns-Artist' %}">Web Designs</a>
 
     </div>
     
@@ -47,10 +45,80 @@
     </script>
   
   </br>
-
-      <h1 class = "mb-3">Logo Layout's Category</h1>
+  
+    <h1 class = "mb-3">Logo Layout's Category</h1>
+  </br>
+  <div class="container">
+    <img src="{%static 'Home_Business/minimalist.png'%}" height="80" width="700" class="center">
+    <div class="panel panel-default">
+      <div class="panel-body"> 
+        {% for post in logoartist %}
+        {% if post.category == "LOGO" %}
+        {% if post.theme == "MINIMALIST" %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+                <div class="media-body">
+                  <div class="article-metadata">
+        
+                    <a class="mr-2">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.dateposted }} |  <a class="mr-2" href="{%  url 'Feedback' %}">Search {{ post.author }}'s Feedbacks</a></small>
+                  </div>
+                  
+                  <h2><a class="article-Expertise" href="{% url 'Portfolio-Detail' post.id %}">{{ post.Expertise }}</a></h2>
+                  <p class="article-Background">{{ post.Background}}</p>
+                  <p class="article-category">{{ post.category}}</p>
+                  <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+                  <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Bid-Create' %}" role="button">Offer</a>
+                  
+                </div> 
+              </article>
+              {% endif %} 
+              {% endif %} 
+        {% endfor %}
+    </div> 
+    </div>
+    </div>
+ 
+  </br>
+  <div class="container">
+    <img src="{%static 'Home_Business/modern.png'%}" height="80" width="700" class="center">
+    <div class="panel panel-default">
+      
+      <div class="panel-body">
+        {% for post in logoartist %}
+        {% if post.category == "LOGO" %}
+        {% if post.theme == "MODERN" %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
+                <div class="media-body">
+                  <div class="article-metadata">
+        
+                    <a class="mr-2">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.dateposted }} |  <a class="mr-2" href="{%  url 'Feedback' %}">Search {{ post.author }}'s Feedbacks</a></small>
+                  </div>
+                  
+                  <h2><a class="article-Expertise" href="{% url 'Portfolio-Detail' post.id %}">{{ post.Expertise }}</a></h2>
+                  <p class="article-Background">{{ post.Background}}</p>
+                  <p class="article-category">{{ post.category}}</p>
+                  <p class="article-location">{{ post.city }}, {{ post.street }}</p>
+                  <a class="btn btn-primary btn-lg w-20 lead" href="{% url 'Bid-Create' %}" role="button">Offer</a>
+                  
+                </div> 
+              </article>
+              {% endif %} 
+              {% endif %} 
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+  </br>
+<div class="container">
+  <img src="{%static 'Home_Business/innovative.png'%}" height="80" width="700" class="center">
+  <div class="panel panel-default">
+    <div class="panel-body">
       {% for post in logoartist %}
       {% if post.category == "LOGO" %}
+      {% if post.theme == "INNOVATIVE" %}
       <article class="media content-section">
         <img class="rounded-circle article-img" src="{{  post.author.profile.image.url  }}">
               <div class="media-body">
@@ -69,27 +137,13 @@
               </div> 
             </article>
             {% endif %} 
-      {% endfor %}
-          {% if is_paginated %}
-
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">|<<</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>
-      {% endif %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
+            {% endif %} 
       {% endfor %}
 
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">></a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>>|</a>
-      {% endif %}
-     
-    {% endif %}
+  </div>
+  </div>
+  </div>
+
+</br>
 {%  endblock content   %} 
    

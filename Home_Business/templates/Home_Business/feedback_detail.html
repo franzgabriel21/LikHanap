@@ -1,7 +1,8 @@
 {%  extends "Home_Business/base.html"  %}
 {%  block content   %} 
             
-<h2>Thank you for your feedback!</h2>
+<b>Thank you for your feedback!</b> 
+     <p>You can now claim your ownership certificate on your project list and make your next LikHanap project!</p>
      <article class="media content-section">
           <img class="rounded-circle article-img" src="{{  object.author.profile.image.url  }}">
               <div class="media-body">
@@ -10,12 +11,14 @@
                </div>
           </br>
           <p class="article-Comment">{{ object.Comment }}</p>
+          <p class="article-Rating">{{ object.rating }}</p>
 
           <small class="text-muted"> <b>Send feedback to: {{ object.artist_username }}</b></small> 
      </br>
 </br>
-          <a class="btn btn-outline-secondary" href="{% url 'LikHanap-Freelance' %}" role="button">OK</a> 
+          <a class="btn btn-outline-warning" href="{% url 'certcategory' %}" role="button">Request for Certificate</a> 
      </br>
+</br>
              </div>
       </article>
            

@@ -1,0 +1,61 @@
+{%  extends "Home_Business/base.html"  %}
+{%  block content   %} 
+
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+       <table class="center" style= "color: rgb(0, 0, 0)">
+          <tr>
+              
+               
+               <th style="text-align:center">Business Name:</th>
+               <th style="text-align:center">Business Owner's Name:</th>
+               <th style="text-align:center">LikHanap Artist:</th>
+               <th style="text-align:center">Business URL Link:</th>
+          </tr>
+          <tr>
+               
+               
+               <td style="text-align:center">{{ object.businessname }}</td>
+               <td style="text-align:center">{{ object.ownername }}</td>
+               <td style="text-align:center">{{ object.artistname }}</td>
+               <td style="text-align:center"><a href= "{{ object.link }}">{{ object.link }}</a></td>
+
+          </tr>      
+          </table>
+     </br>
+         <div><a class="btn btn-outline-success" href="{% url 'certificatelist' %}" role="button">Proceed &raquo;</a> <a class= "btn btn-outline-info" href="{%  url 'WebCertificate-Update' object.id  %}">Update</a>
+           <a class= "btn btn-outline-danger" href="{%  url 'WebCertificate-Delete' object.id  %}">Delete</a>
+          </div>
+          
+     </br>
+     <style>
+ 
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #a7a7a7;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #414141c0;
+  }
+            
+            
+          </style>
+      
+     
+    
+      </br>
+      </br>
+             
+          
+      </article>
+           
+{%  endblock content   %} 
+   
